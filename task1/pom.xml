@@ -7,17 +7,6 @@
 
 
 	<dependencies>
-		<dependency>
-			<groupId>tw.edu.ntu.csie</groupId>
-			<artifactId>libsvm</artifactId>
-			<version>3.17</version>
-		</dependency>
-		
-		<dependency>
-                        <groupId>nz.ac.waikato.cms.weka</groupId>
-                        <artifactId>weka-stable</artifactId>
-	        <version>3.6.10</version>
-        </dependency>
 
 		<dependency>
 			<groupId>cloudscale</groupId>
@@ -31,6 +20,11 @@
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
+	 <dependency>
+	  <groupId>${project.groupId}</groupId>
+	  <artifactId>sentiment</artifactId>
+	  <version>${project.version}</version>
+	 </dependency>
 	</dependencies>
 
 	<repositories>
