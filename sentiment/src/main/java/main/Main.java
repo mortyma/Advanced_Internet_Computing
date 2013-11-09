@@ -2,7 +2,6 @@ package main;
 
 
 import java.util.LinkedList;
-import java.util.List;
 
 import commands.CalculateWmPrecisionCommand;
 import commands.ConstructCommand;
@@ -10,17 +9,8 @@ import commands.ConstructWmCommand;
 import commands.PrepareTrainCommand;
 
 import classifier.ClassifierBuilder;
-import classifier.IClassifier;
 import classifier.Invoker;
-import classifier.Item;
-import classifier.WeightedMajority;
-import classifier.WekaClassifier;
 import util.Options;
-import weka.classifiers.Classifier;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.functions.MultilayerPerceptron;
-import weka.classifiers.functions.VotedPerceptron;
-import weka.classifiers.trees.J48;
 
 
 public class Main {
