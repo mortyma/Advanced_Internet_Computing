@@ -1,3 +1,8 @@
+data/
+sentiment_project/bin/
+sentiment_project/doc/
+
+
 *~
 *.acn
 *.acr
