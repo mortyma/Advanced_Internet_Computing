@@ -37,3 +37,4 @@ sentiment_project/doc/
 *.vrb
 *.xdy
 *.tdos
+/sentiment/target/
