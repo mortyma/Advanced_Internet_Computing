@@ -2,12 +2,15 @@ package main;
 
 
 import java.util.LinkedList;
+import java.util.logging.Level;
 
+import at.ac.tuwien.infosys.cloudscale.annotations.CloudScaleConfigurationProvider;
+import at.ac.tuwien.infosys.cloudscale.configuration.CloudScaleConfiguration;
+import at.ac.tuwien.infosys.cloudscale.configuration.CloudScaleConfigurationBuilder;
 import commands.CalculateWmPrecisionCommand;
 import commands.ConstructCommand;
 import commands.ConstructWmCommand;
 import commands.PrepareTrainCommand;
-
 import classifier.ClassifierBuilder;
 import classifier.Invoker;
 import util.Options;
@@ -84,5 +87,13 @@ public class Main {
 			}
 			inv.calculateWmPrecision();
 		}
+	}
+	
+	@CloudScaleConfigurationProvider
+	public static CloudScaleConfiguration getConfiguration()
+	{
+		return CloudScaleConfigurationBuilder
+				.createLocalConfigurationBuilder(new SentimentScalingPolicy(), Level.SEVERE)
+				.build();
 	}
 }

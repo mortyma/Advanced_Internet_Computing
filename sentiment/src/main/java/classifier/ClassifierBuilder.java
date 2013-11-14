@@ -12,16 +12,17 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
+import at.ac.tuwien.infosys.cloudscale.annotations.CloudObject;
 import util.ArffFileCreator;
 import util.Options;
 import weka.classifiers.Classifier;
 import weka.classifiers.functions.MultilayerPerceptron;
-
 import documents.DocumentsSet;
 
 /**
  * The receiver class
  */
+
 public class ClassifierBuilder {
 	
 	DocumentsSet _ds;

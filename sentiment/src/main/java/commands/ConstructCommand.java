@@ -19,7 +19,6 @@ public class ConstructCommand implements Command {
 	/**
 	 * calls the receiver to execute the command
 	 */
-	@Override
 	public void execute() {
 		try {
 			this.clb.constructClassifierByName();

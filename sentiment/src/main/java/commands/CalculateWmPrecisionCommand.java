@@ -18,7 +18,6 @@ public class CalculateWmPrecisionCommand implements Command {
 	/**
 	 * calls the receiver to execute the command
 	 */
-	@Override
 	public void execute() {
 		try {
 			this.clb.calculateWmPrecision();

@@ -21,7 +21,6 @@ public class PrepareTrainCommand implements Command{
 	/**
 	 * calls the receiver to execute command
 	 */
-	@Override
 	public void execute() {
 		try {
 			clb.prepareTrain();

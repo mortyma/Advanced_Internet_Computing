@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.StringTokenizer;
 
+import at.ac.tuwien.infosys.cloudscale.annotations.ByValueParameter;
+import at.ac.tuwien.infosys.cloudscale.annotations.CloudObject;
 import weka.attributeSelection.InfoGainAttributeEval;
 import weka.attributeSelection.Ranker;
 import weka.classifiers.Classifier;
@@ -18,11 +20,14 @@ import weka.filters.Filter;
  * class representing a classifier in Weka
  *
  */
+
 public class WekaClassifier implements IClassifier, Serializable {
 	
 	private static final long serialVersionUID = 539728411811295588L;
 	private Classifier _cl;
+
 	private Instances _train;
+
 	private Instances _test;
 	
 	public WekaClassifier() throws Exception {
@@ -36,7 +41,7 @@ public class WekaClassifier implements IClassifier, Serializable {
 	 * sets a given instances for test
 	 * @param train the train instances
 	 */
-	public void set_train(Instances train) {
+	public void set_train( Instances train) {
 		_train = train;
 	}
 
@@ -61,7 +66,6 @@ public class WekaClassifier implements IClassifier, Serializable {
 	 * @param stringa the tweet to classify
 	 * @return the tweet polarity
 	 */
-	@Override
 	public String classify(String stringa) throws FileNotFoundException,
 			IOException, Exception {
 		String string_new;
@@ -105,7 +109,6 @@ public class WekaClassifier implements IClassifier, Serializable {
 	/**
 	 * evaluates the classifier 
 	 */
-	@Override
 	public void evaluate() throws Exception {
 		// evaluate classifier and print some statistics
 		if (_test.classIndex() == -1)
@@ -119,7 +122,6 @@ public class WekaClassifier implements IClassifier, Serializable {
 	/**
 	 * trains the classifier
 	 */
-	@Override
 	public void train() throws Exception {
 		if (_train.classIndex() == -1)
 			_train.setClassIndex(_train.numAttributes() - 1);

@@ -1,13 +1,17 @@
 package util;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+import at.ac.tuwien.infosys.cloudscale.annotations.ByValueParameter;
+import at.ac.tuwien.infosys.cloudscale.annotations.CloudObject;
 import classifier.WekaClassifier;
 /**
  * class to manage training options
  */
-public class Options {
+@ByValueParameter
+public class Options implements Serializable {
 	
 	private int numFeatures;
 	private boolean selectedFeaturesByFrequency;

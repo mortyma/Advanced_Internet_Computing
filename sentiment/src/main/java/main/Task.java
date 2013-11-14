@@ -1,21 +1,26 @@
 package main;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
-import at.ac.tuwien.infosys.cloudscale.annotations.CloudScaleShutdown;
+import at.ac.tuwien.infosys.cloudscale.annotations.ByValueParameter;
+import at.ac.tuwien.infosys.cloudscale.annotations.CloudObject;
+import at.ac.tuwien.infosys.cloudscale.annotations.DestructCloudObject;
 import util.Options;
 import weka.classifiers.bayes.NaiveBayes;
 import classifier.ClassifierBuilder;
 import classifier.WekaClassifier;
 
-public class Test {
+@CloudObject
+public class Task {
 	
-	
-	public static void main(String[] args) {
+	public Task()
+	{
 		
+	}
+
+	public @ByValueParameter String  run(@ByValueParameter String key)
+	{
 		ClassifierBuilder clb = new ClassifierBuilder();
 		Options opt = new Options();
 		clb.setOpt(opt);
@@ -51,7 +56,9 @@ public class Test {
 		}
 
 		try {
-			System.out.println("output is:"+ wc.classify("obama"));
+			
+			return "output is:"+ wc.classify(key);
+			//System.out.println("output is:"+ wc.classify(key));
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -63,7 +70,6 @@ public class Test {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		return null;
 	}
-
 }
