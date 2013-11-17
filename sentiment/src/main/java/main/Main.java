@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import at.ac.tuwien.infosys.cloudscale.annotations.CloudScaleConfigurationProvider;
 import at.ac.tuwien.infosys.cloudscale.configuration.CloudScaleConfiguration;
 import at.ac.tuwien.infosys.cloudscale.configuration.CloudScaleConfigurationBuilder;
+import at.ac.tuwien.infosys.cloudscale.vm.ec2.EC2CloudPlatformConfiguration;
 import commands.CalculateWmPrecisionCommand;
 import commands.ConstructCommand;
 import commands.ConstructWmCommand;
@@ -95,5 +96,13 @@ public class Main {
 		return CloudScaleConfigurationBuilder
 				.createLocalConfigurationBuilder(new SentimentScalingPolicy(), Level.SEVERE)
 				.build();
+		
+//		EC2CloudPlatformConfiguration cloudPlatformConfiguration = new EC2CloudPlatformConfiguration();
+//		cloudPlatformConfiguration.setAwsConfigFile("files/ec2.props");
+//		
+//
+//		return  CloudScaleConfigurationBuilder.createLocalConfigurationBuilder()
+//			.with(cloudPlatformConfiguration)
+//			.build();
 	}
 }
