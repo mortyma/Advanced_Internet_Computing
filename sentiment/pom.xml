@@ -27,6 +27,13 @@
        <artifactId>weka-stable</artifactId>
        <version>3.6.10</version>
     </dependency>
+    
+    <dependency>
+           <groupId>org.twitter4j</groupId>
+           <artifactId>twitter4j-core</artifactId>
+           <version>[3.0,)</version>
+    </dependency>
+    
     <!-- Test dependencies -->
     <dependency>
       <groupId>junit</groupId>
