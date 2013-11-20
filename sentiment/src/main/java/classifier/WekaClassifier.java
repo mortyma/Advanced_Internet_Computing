@@ -61,7 +61,7 @@ public class WekaClassifier implements IClassifier, Serializable {
 	 * @param stringa the tweet to classify
 	 * @return the tweet polarity
 	 */
-	@Override
+
 	public String classify(String stringa) throws FileNotFoundException,
 			IOException, Exception {
 		String string_new;
@@ -105,7 +105,6 @@ public class WekaClassifier implements IClassifier, Serializable {
 	/**
 	 * evaluates the classifier 
 	 */
-	@Override
 	public void evaluate() throws Exception {
 		// evaluate classifier and print some statistics
 		if (_test.classIndex() == -1)
@@ -119,7 +118,6 @@ public class WekaClassifier implements IClassifier, Serializable {
 	/**
 	 * trains the classifier
 	 */
-	@Override
 	public void train() throws Exception {
 		if (_train.classIndex() == -1)
 			_train.setClassIndex(_train.numAttributes() - 1);

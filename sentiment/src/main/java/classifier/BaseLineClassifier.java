@@ -16,7 +16,7 @@ public class BaseLineClassifier implements IClassifier {
 	/**
 	 * evaluates the classifier
 	 */
-	@Override
+
 	public void evaluate() throws Exception {
 		int giuste = 0, sbagliate = 0;
 		FileInputStream fstream = new FileInputStream("files/test_base.txt");
@@ -56,7 +56,6 @@ public class BaseLineClassifier implements IClassifier {
 	/**
 	 * no action
 	 */
-	@Override
 	public void train() throws Exception {
 		// TODO Auto-generated method stub
 	}
@@ -66,7 +65,6 @@ public class BaseLineClassifier implements IClassifier {
 	 * @param stringa a string to classify
 	 * @return the tweet's polarity
 	 */
-	@Override
 	public String classify(String stringa) {
 		List<String> res_pos = new LinkedList<String>();
 		List<String> res_neg = new LinkedList<String>();
