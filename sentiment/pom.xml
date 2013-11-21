@@ -51,7 +51,8 @@
         <groupId>cloudscale</groupId>
         <artifactId>cloudscale.cli</artifactId>
         <version>0.2.0</version>
-</dependency>
+		</dependency>
+		  
 
 		<!-- Test dependencies -->
 		<dependency>
@@ -88,10 +89,10 @@
 				<configuration>
 					<executable>java</executable>
 					<arguments>
-						<argument>-Dcloudscale.configuration=main.Main</argument>
+						<argument>-Dcloudscale.configuration=cloudscale.Configuration</argument>
 						<argument>-classpath</argument>
 						<classpath />
-						<argument>main.Test3</argument>
+						<argument>main.Main</argument>
 						<argument>evaluateWm</argument>
 					</arguments>
 				</configuration>

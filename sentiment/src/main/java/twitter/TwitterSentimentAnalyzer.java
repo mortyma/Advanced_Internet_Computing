@@ -18,7 +18,7 @@ import twitter4j.TwitterFactory;
  */
 public class TwitterSentimentAnalyzer {
     
-    DateFormat formatter = new SimpleDateFormat("YYYY-MM-DD");
+    DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
     Analyzer analyzer = new Analyzer();
     
     /**
