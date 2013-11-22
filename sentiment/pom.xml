@@ -19,6 +19,13 @@
 			<id>infosys-repository</id>
 			<url>http://www.infosys.tuwien.ac.at/mvn</url>
 		</repository>
+		
+		 <repository>
+        <id>thirdparty-uploads</id>
+        <name>JBoss Thirdparty Uploads</name>
+        <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-uploads</url>
+      </repository>
+      
 	</repositories>
 
 	<dependencies>
@@ -46,13 +53,19 @@
 			<artifactId>cloudscale.core</artifactId>
 			<version>0.2.0</version>
 		</dependency>
-		
+
 		<dependency>
-        <groupId>cloudscale</groupId>
-        <artifactId>cloudscale.cli</artifactId>
-        <version>0.2.0</version>
+			<groupId>cloudscale</groupId>
+			<artifactId>cloudscale.cli</artifactId>
+			<version>0.2.0</version>
 		</dependency>
-		  
+
+		<dependency>
+			<groupId>org.hyperic</groupId>
+			<artifactId>sigar</artifactId>
+			<version>1.6.5.132</version>
+		</dependency>
+
 
 		<!-- Test dependencies -->
 		<dependency>
@@ -77,7 +90,7 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
-				
+
 				<executions>
 					<execution>
 						<goals>
