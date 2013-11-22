@@ -28,7 +28,7 @@ public class Configuration
 		
 		//ec2 configuration
 //      EC2CloudPlatformConfiguration cloudPlatformConfiguration = new EC2CloudPlatformConfiguration();
-//      cloudPlatformConfiguration.setAwsConfigFile("files/ec2.props");
+//      cloudPlatformConfiguration.setAwsConfigFile("ec2.props");
 //      
 //
 //      return CloudScaleConfigurationBuilder.createLocalConfigurationBuilder()
