@@ -18,8 +18,6 @@ public class Configuration
 				.withUI(true)
 				.build();
 		
-		
-		
 		//default policy
 		//new HostPerObjectScalingPolicy();
 		
@@ -27,6 +25,15 @@ public class Configuration
 //		return CloudScaleConfigurationBuilder
 //				.createLocalConfigurationBuilder()
 //				.build();
+		
+		//ec2 configuration
+//      EC2CloudPlatformConfiguration cloudPlatformConfiguration = new EC2CloudPlatformConfiguration();
+//      cloudPlatformConfiguration.setAwsConfigFile("files/ec2.props");
+//      
+//
+//      return CloudScaleConfigurationBuilder.createLocalConfigurationBuilder()
+//              .with(cloudPlatformConfiguration)
+//              .build();
 	}
 
 	
