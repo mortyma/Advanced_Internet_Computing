@@ -30,8 +30,7 @@ public class Main {
 					key = line[0];
 					since = new SimpleDateFormat("yyyy-mm-dd").parse(line[1]);
 					until = new SimpleDateFormat("yyyy-mm-dd").parse(line[2]);
-					for(int i = 0; i < 100; i++)
-						System.out.println(new Task().run(key, since, until));
+					System.out.println(new Task().run(key, since, until));
 					
 					System.out.println("enter key, since, until. (e.g. aic, 2013-11-01, 2013-11-19)");
 					line = bufferedReader.readLine().split(",");
