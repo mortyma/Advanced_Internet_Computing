@@ -41,7 +41,7 @@ public class RequestInvokerTest extends TestCase {
         Date since=null;
         Date until=null;
         try {
-                since = new SimpleDateFormat("yyyy-mm-dd").parse("2013-11-19");
+                since = new SimpleDateFormat("yyyy-mm-dd").parse("2013-11-27");
                 until = new SimpleDateFormat("yyyy-mm-dd").parse("2013-11-28");
         } catch (ParseException e) {
                 e.printStackTrace();
