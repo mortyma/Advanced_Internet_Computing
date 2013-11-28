@@ -31,7 +31,7 @@ public class Configuration
       cloudPlatformConfiguration.setAwsConfigFile("ec2.props");
       
 
-      return CloudScaleConfigurationBuilder.createLocalConfigurationBuilder()
+      return CloudScaleConfigurationBuilder.createLocalConfigurationBuilder(new TestPolicy(), Level.SEVERE)
               .with(cloudPlatformConfiguration)
               .build();
 	}
