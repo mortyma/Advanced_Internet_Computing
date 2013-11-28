@@ -2,7 +2,6 @@ package sentiment;
 
 
 import at.ac.tuwien.infosys.cloudscale.annotations.ByValueParameter;
-import at.ac.tuwien.infosys.cloudscale.annotations.CloudObject;
 import classifier.ClassifierBuilder;
 import classifier.IClassifier;
 import classifier.Item;
@@ -16,7 +15,7 @@ import java.util.List;
  *
  * @author martin
  */
-@CloudObject
+//@CloudObject
 public class Analyzer implements IAnalyzer {
 
     WeightedMajority wm;
