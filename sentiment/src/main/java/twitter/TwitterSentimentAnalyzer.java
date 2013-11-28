@@ -53,7 +53,7 @@ public class TwitterSentimentAnalyzer {
      * -1 if no tweets for key were found
      */
     public double sentimentFor(String key, String since, String until) {
-        Twitter twitter = new TwitterFactory().getInstance();
+        Twitter twitter = new TwitterFactory().getSingleton();
         int sentiment = 0, cnt = 0;
         try {
             Query query = new Query(key);
