@@ -34,8 +34,8 @@ public class SimulatorTimerTask extends TimerTask {
 			Date since=null;
 			Date until=null;
 			try {
-				since = new SimpleDateFormat("yyyy-mm-dd").parse("2013-11-01");
-				until = new SimpleDateFormat("yyyy-mm-dd").parse("2013-11-19");
+				since = new SimpleDateFormat("yyyy-mm-dd").parse("2013-11-19");
+				until = new SimpleDateFormat("yyyy-mm-dd").parse("2013-11-28");
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
