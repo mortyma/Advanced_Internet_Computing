@@ -20,6 +20,7 @@ public class Main {
 		String key;
                 String[] line;
                 ExecutorService executor = Executors.newCachedThreadPool();
+                int id = 1;
 
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -32,7 +33,9 @@ public class Main {
 					key = line[0];
 					since = new SimpleDateFormat("yyyy-mm-dd").parse(line[1]);
 					until = new SimpleDateFormat("yyyy-mm-dd").parse(line[2]);
-                                        executor.execute(new RequestInvoker(key, since, until));			
+                                        System.out.println("Request " + id + ": initiated");
+                                        executor.execute(new RequestInvoker(id, key, since, until));
+                                        id++;
 				} catch (Exception e) 
 				{
 					System.out.println(e.getMessage());
@@ -41,6 +44,7 @@ public class Main {
 			} while (line != null);
                         
                         //wait for all threads to 1finish
+                        executor.shutdown();
                         executor.awaitTermination(10, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
