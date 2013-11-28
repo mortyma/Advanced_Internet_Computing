@@ -17,7 +17,7 @@ public class Main {
 		
                 final String enterRequest = "enter key, since, until. (e.g. tuw_aic, 2013-11-19, 2013-11-28)";
 		Date since, until;
-		String key;
+		String key, input = "quit";
                 String[] line;
                 ExecutorService executor = Executors.newCachedThreadPool();
                 int id = 1;
@@ -29,7 +29,11 @@ public class Main {
 				try
 				{
                                         System.out.println(enterRequest);
-                                        line = bufferedReader.readLine().split(",");
+                                        
+                                        input = bufferedReader.readLine();
+                                        if(input.equals("quit"))
+                                            break;
+                                        line = input.split(",");
 					key = line[0];
 					since = new SimpleDateFormat("yyyy-mm-dd").parse(line[1]);
 					until = new SimpleDateFormat("yyyy-mm-dd").parse(line[2]);
@@ -41,11 +45,11 @@ public class Main {
 					System.out.println(e.getMessage());
 					line = bufferedReader.readLine().split(",");
 				}
-			} while (line != null);
+			} while (!input.equals("quit"));
                         
                         //wait for all threads to 1finish
                         executor.shutdown();
-                        executor.awaitTermination(10, TimeUnit.MINUTES);
+                        executor.awaitTermination(5, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
