@@ -13,13 +13,13 @@ public class Configuration
 	@CloudScaleConfigurationProvider
 	public static CloudScaleConfiguration getConfiguration()
 	{	
-		return getLocalConfiguration();
+		return getEC2Configuration();
 	}
 	
 	private static CloudScaleConfiguration getLocalConfiguration()
 	{
 		return CloudScaleConfigurationBuilder
-				.createLocalConfigurationBuilder(new TestPolicy(), Level.SEVERE)
+				.createLocalConfigurationBuilder(new TestPolicy(), Level.OFF)
 				.withMonitoring(true)
 				.withUI(true)
 				.build();
@@ -31,7 +31,7 @@ public class Configuration
       cloudPlatformConfiguration.setAwsConfigFile("ec2.props");
       
 
-      return CloudScaleConfigurationBuilder.createLocalConfigurationBuilder(new TestPolicy(), Level.SEVERE)
+      return CloudScaleConfigurationBuilder.createLocalConfigurationBuilder(new TestPolicy(), Level.OFF)
               .with(cloudPlatformConfiguration)
               .build();
 	}
