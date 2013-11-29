@@ -13,13 +13,13 @@ public class Configuration
 	@CloudScaleConfigurationProvider
 	public static CloudScaleConfiguration getConfiguration()
 	{	
-		return getEC2Configuration();
+		return getLocalConfiguration();
 	}
 	
 	private static CloudScaleConfiguration getLocalConfiguration()
 	{
 		return CloudScaleConfigurationBuilder
-				.createLocalConfigurationBuilder(new TestPolicy(), Level.OFF)
+				.createLocalConfigurationBuilder(new TestPolicy(), Level.FINE)
 				.withMonitoring(true)
 				.withUI(true)
 				.build();
@@ -27,14 +27,15 @@ public class Configuration
 	
 	private static CloudScaleConfiguration getEC2Configuration()
 	{
-      EC2CloudPlatformConfiguration cloudPlatformConfiguration = new EC2CloudPlatformConfiguration();
-      cloudPlatformConfiguration.setAwsConfigFile("ec2.props");
+      		EC2CloudPlatformConfiguration cloudPlatformConfiguration = new EC2CloudPlatformConfiguration();
+		cloudPlatformConfiguration.setAwsConfigFile("ec2.props");
       
 
-      return CloudScaleConfigurationBuilder.createLocalConfigurationBuilder(new TestPolicy(), Level.FINE)
-              .with(cloudPlatformConfiguration)
-              .withMonitoring(true)
-              .build();
+	      return CloudScaleConfigurationBuilder
+			.createLocalConfigurationBuilder(new TestPolicy(), Level.SEVERE)
+	              .with(cloudPlatformConfiguration).withMQStartServerAutomatically(true)
+	              .withMonitoring(true)
+	              .build();
 	}
 	
 	
