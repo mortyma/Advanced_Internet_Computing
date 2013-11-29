@@ -63,8 +63,7 @@ public class NewTestPolicy  implements IScalingPolicy
 		// (and start a reserve instance)
 			if (selected == null) { 
 				selected = hostPool.startNewHost();
-				hostPool.startNewHostAsync();
-			}
+				}
 			
 		return selected;
 		}
