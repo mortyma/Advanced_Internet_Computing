@@ -29,19 +29,19 @@ public class DemoUI extends javax.swing.JFrame {
         initComponents();
         printer = new ResultPrinter() {
             @Override
-            public synchronized void printResult(int id, String key, double result) {
+            public synchronized void printResult(int id, String key, Date since, Date until, double result) {
                 txa_output.append(requestID + id + ": ");
                 System.out.print(requestID + id + ": ");
                 if (result == -1) {
                     txa_output.append(noTweets + key + "\n");
                 } else {
-                    txa_output.append(sentimentFor + key + ": " + result + "\n");
+                    txa_output.append(getResultString(id, key, since, until, result) + "\n");
                 }
             }
 
             @Override
-            public void printInitiated(int id) {
-                 txa_output.append("Request " + id + ": initiated\n");
+            public void printInitiated(int id, String key, Date since, Date until) {
+                 txa_output.append(getInitatedString(id, key, since, until) + "\n");
             }
         };
         dispatcher = new RequestDispatcher(printer);
@@ -150,7 +150,7 @@ public class DemoUI extends javax.swing.JFrame {
             return;
         }
         String key = txf_key.getText();
-        printer.printInitiated(id);
+        printer.printInitiated(id, key, since, until);
         dispatcher.dispatch(id, key, since, until);
         ++id;
     }//GEN-LAST:event_btn_analyzeActionPerformed

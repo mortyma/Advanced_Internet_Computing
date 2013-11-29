@@ -50,7 +50,7 @@ public class RequestInvokerTest extends TestCase {
         int i;
         ResultPrinter printer = new StdOutPrinter();
         for(i = 0; i<nr_requests;i++) {
-            printer.printInitiated(i);
+            printer.printInitiated(i, key, since, until);
             executor.execute(new RequestInvoker(printer, i, key, since, until));
         }
         executor.shutdown();

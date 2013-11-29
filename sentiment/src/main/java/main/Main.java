@@ -13,7 +13,7 @@ public class Main {
 	@CloudScaleShutdown
 	public static void main(String[] args) {
 		
-                final String enterRequest = "enter key, since, until. (e.g. tuw_aic, 2013-11-19, 2013-11-28)";
+                final String enterRequest = "enter key, since, until. (e.g. obama, 2013-11-19, 2013-11-28)";
 		Date since, until;
 		String key, input = "quit";
                 String[] line;
@@ -36,7 +36,7 @@ public class Main {
 					key = line[0];
 					since = dateFormat.parse(line[1]);
 					until = dateFormat.parse(line[2]);
-                                        printer.printInitiated(id);
+                                        printer.printInitiated(id, key, since, until);
                                         dispatcher.dispatch(id, key, since, until);
                                         id++;
 				} catch (Exception e) 
