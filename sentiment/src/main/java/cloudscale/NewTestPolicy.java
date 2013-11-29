@@ -17,9 +17,11 @@ public class NewTestPolicy  implements IScalingPolicy
 	// for each host if CPU < 75% or the host is running no object then choose it, otherwise start a new host
 	public IHost selectHost(ClientCloudObject newCloudObject, IHostPool hostPool) 
 	{
-
+		System.out.println("##################################################################");
 		System.out.println("Starting to select host...");
 		System.out.println("There are " + hostPool.getHostsCount() + " cloud hosts in the cloud pool now!");
+		System.out.println("##################################################################");
+
 
 		// avoiding scale up and down at the same time by lock!
 		synchronized (lock) {
@@ -29,31 +31,45 @@ public class NewTestPolicy  implements IScalingPolicy
 			IHost selected = null;
 			for (IHost host : hostPool.getHosts()) {
 				CPUUsage cpu = host.getCurrentCPULoad();
+				System.out.println("##################################################################");
 				System.out.println(String.format(
 					"Host %s (%s) has reported current CPU load %f",
 					host.getId().toString(), host.getIpAddress(), cpu.getCpuLoad()
+					
 				));
+				System.out.println("##################################################################");
 				if((cpu.getCpuLoad() != -1 && cpu.getCpuLoad() < 0.75) || host.getCloudObjectsCount() == 0) {
 					selected = host;
 				}
 				
 			}
-			System.out.println("-------------------------------------------------------------");
-			if(selected == null)
+
+			if(selected == null){
+				System.out.println("##################################################################");
 				System.out.println("Found no suitable host, scaling up");
+				System.out.println("##################################################################");
+
+			}
 			else
+			{
+				System.out.println("##################################################################");
 				System.out.println("Using host "+selected.getId().toString());
-			System.out.println("-------------------------------------------------------------");
+				System.out.println("##################################################################");
+			}
 
 
 			
 		// no suitable host found, start a new one (and register monitoring for the host)
 		// (and start a reserve instance)
-		IHost newHost = hostPool.startNewHost();
-		hostPool.startNewHostAsync();
-		return newHost;
+			if (selected == null) { 
+				selected = hostPool.startNewHost();
+				hostPool.startNewHostAsync();
+			}
+			
+		return selected;
+		}
 	}
-	}
+	
 	
 	
 	public boolean scaleDown(IHost host, IHostPool hostPool) {
@@ -61,33 +77,45 @@ public class NewTestPolicy  implements IScalingPolicy
 		// Scaling down policy
 		// we do scaling down for cloud hosts which are:
 		// running and unused, and it is not the last host 
+		
+		System.out.println("##################################################################");
 		System.out.println("Starting to do scaling down policy ...");
 		System.out.println("There are " + hostPool.getHostsCount() + " cloud hosts in the cloud pool now!");
+		System.out.println("##################################################################");
 
 		boolean result = true;
 		
 		synchronized (lock) {
-
-			System.out.println("-------------------------------------------------------------");
+			
+			System.out.println("##################################################################");
 			System.out.println("Checking whether to scale down host "+host.getId().toString());
+			System.out.println("##################################################################");
 			
 			if(!host.isOnline()) {
 				result = false;
+				System.out.println("##################################################################");
 				System.out.println("Not scaling down. Host is offline");
+				System.out.println("##################################################################");
 			}
 
 			if(host.getCloudObjectsCount() > 0) {
 				result = false;
+				System.out.println("##################################################################");
 				System.out.println("Not scaling down. Host is in use");
+				System.out.println("##################################################################");
 			}
 
 			if(!otherUnusedHost(hostPool, host.getId())) {
 				result = false;
+				System.out.println("##################################################################");
 				System.out.println("Not scaling down. Host is the last unused host");
+				System.out.println("##################################################################");
 			}
 		}
 		if(result) {
+			System.out.println("##################################################################");
 			System.out.println("Scaling down host "+host.getId().toString());
+			System.out.println("##################################################################");
 			
 		}
 	

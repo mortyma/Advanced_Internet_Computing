@@ -13,13 +13,13 @@ public class Configuration
 	@CloudScaleConfigurationProvider
 	public static CloudScaleConfiguration getConfiguration()
 	{	
-		return getEC2Configuration();
+		return getLocalConfiguration();
 	}
 	
 	private static CloudScaleConfiguration getLocalConfiguration()
 	{
 		return CloudScaleConfigurationBuilder
-				.createLocalConfigurationBuilder(new TestPolicy(), Level.FINE)
+				.createLocalConfigurationBuilder(new NewTestPolicy(), Level.INFO)
 				.withMonitoring(true)
 				.withUI(true)
 				.build();
@@ -32,7 +32,7 @@ public class Configuration
       
 
 	      return CloudScaleConfigurationBuilder
-			.createLocalConfigurationBuilder(new TestPolicy(), Level.SEVERE)
+			.createLocalConfigurationBuilder(new NewTestPolicy(), Level.INFO)
 	              .with(cloudPlatformConfiguration).withMQStartServerAutomatically(true)
 	              .withMonitoring(true)
 	              .build();
