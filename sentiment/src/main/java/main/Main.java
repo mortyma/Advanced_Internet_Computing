@@ -6,9 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import at.ac.tuwien.infosys.cloudscale.annotations.CloudScaleShutdown;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 public class Main {
 
@@ -19,8 +16,8 @@ public class Main {
 		Date since, until;
 		String key, input = "quit";
                 String[] line;
-                ExecutorService executor = Executors.newCachedThreadPool();
                 int id = 1;
+                RequestDispatcher dispatcher = new RequestDispatcher();
 
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -38,7 +35,7 @@ public class Main {
 					since = new SimpleDateFormat("yyyy-mm-dd").parse(line[1]);
 					until = new SimpleDateFormat("yyyy-mm-dd").parse(line[2]);
                                         System.out.println("Request " + id + ": initiated");
-                                        executor.execute(new RequestInvoker(id, key, since, until));
+                                       dispatcher.dispatch(id, key, since, until);
                                         id++;
 				} catch (Exception e) 
 				{
@@ -46,10 +43,6 @@ public class Main {
 					line = bufferedReader.readLine().split(",");
 				}
 			} while (!input.equals("quit"));
-                        
-                        //wait for all threads to 1finish
-                        executor.shutdown();
-                        executor.awaitTermination(5, TimeUnit.MINUTES);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
