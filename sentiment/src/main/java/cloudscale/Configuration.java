@@ -13,7 +13,7 @@ public class Configuration
 	@CloudScaleConfigurationProvider
 	public static CloudScaleConfiguration getConfiguration()
 	{	
-		return getLocalConfiguration();
+		return getEC2Configuration();
 	}
 	
 	private static CloudScaleConfiguration getLocalConfiguration()
