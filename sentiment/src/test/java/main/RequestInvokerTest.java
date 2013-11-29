@@ -48,8 +48,10 @@ public class RequestInvokerTest extends TestCase {
         }
         ExecutorService executor = Executors.newFixedThreadPool(nr_requests);
         int i;
+        ResultPrinter printer = new StdOutPrinter();
         for(i = 0; i<nr_requests;i++) {
-            executor.execute(new RequestInvoker(new StdOutPrinter(), i, key, since, until));
+            printer.printInitiated(i);
+            executor.execute(new RequestInvoker(printer, i, key, since, until));
         }
         executor.shutdown();
         executor.awaitTermination(10, TimeUnit.MINUTES);
