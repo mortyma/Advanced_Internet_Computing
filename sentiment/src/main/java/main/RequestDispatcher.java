@@ -14,14 +14,18 @@ import java.util.concurrent.TimeUnit;
  * @author Martin
  */
 public class RequestDispatcher {
+    
     private ExecutorService executor;
+    final static String sentimentFor = "Sentiment for ";
+    final static String noTweets = "Error: No tweets found for ";
+    final static String requestID = "Request ";
     
     public RequestDispatcher() {
          executor = Executors.newCachedThreadPool();
     }
     
     public void dispatch(int id, String key, Date since, Date until) {
-         executor.execute(new RequestInvoker(id, key, since, until));
+         executor.execute(new RequestInvoker(this, id, key, since, until));
     }
     
     public void shutdown() {
@@ -32,6 +36,15 @@ public class RequestDispatcher {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
             System.out.println(ex);
+        }
+    }
+    
+     public static synchronized void print(int id, String key, double result)  {
+        System.out.print(requestID + id + ": "); 
+        if(result == -1) {
+            System.out.println(noTweets + key);
+        } else {
+            System.out.println(sentimentFor + key + ": " + result);
         }
     }
 }
