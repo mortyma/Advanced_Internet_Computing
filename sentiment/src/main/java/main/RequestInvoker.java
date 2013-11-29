@@ -11,11 +11,10 @@ public class RequestInvoker implements Runnable {
     private String key;
     private Date since, until;
     private int id;
-    final static String sentimentFor = "Sentiment for ";
-    final static String noTweets = "Error: No tweets found for ";
-    final static String requestID = "Request ";
+    private ResultPrinter printer = null;
     
-    public RequestInvoker(int id, String key, Date since, Date until) {
+    public RequestInvoker(ResultPrinter printer, int id, String key, Date since, Date until) {
+        this.printer = printer;
         this.key = key;
         this.since = since;
         this.until = until;
@@ -25,15 +24,6 @@ public class RequestInvoker implements Runnable {
     @Override
     public void run() {
         double result = new Task().run(key, since, until);
-        print(id, key, result);
-    }
-    
-    private static synchronized void print(int id, String key, double result)  {
-        System.out.print(requestID + id + ": "); 
-        if(result == -1) {
-            System.out.println(noTweets + key);
-        } else {
-            System.out.println(sentimentFor + key + ": " + result);
-        }
+        printer.print(id, key, result);
     }
 }
