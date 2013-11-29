@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import at.ac.tuwien.infosys.cloudscale.annotations.CloudScaleShutdown;
+import java.text.DateFormat;
 
 public class Main {
 
@@ -17,7 +18,9 @@ public class Main {
 		String key, input = "quit";
                 String[] line;
                 int id = 1;
-                RequestDispatcher dispatcher = new RequestDispatcher();
+                ResultPrinter printer = new StdOutPrinter();
+                RequestDispatcher dispatcher = new RequestDispatcher(printer);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
 
 		try {
 			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
@@ -26,21 +29,20 @@ public class Main {
 				try
 				{
                                         System.out.println(enterRequest);
-                                        
                                         input = bufferedReader.readLine();
                                         if(input.equals("quit"))
                                             break;
                                         line = input.split(",");
 					key = line[0];
-					since = new SimpleDateFormat("yyyy-mm-dd").parse(line[1]);
-					until = new SimpleDateFormat("yyyy-mm-dd").parse(line[2]);
-                                        System.out.println("Request " + id + ": initiated");
-                                       dispatcher.dispatch(id, key, since, until);
+					since = dateFormat.parse(line[1]);
+					until = dateFormat.parse(line[2]);
+                                        printer.printInitiated(id);
+                                        dispatcher.dispatch(id, key, since, until);
                                         id++;
 				} catch (Exception e) 
 				{
-					System.out.println(e.getMessage());
-					line = bufferedReader.readLine().split(",");
+					System.out.println("Invalid request!\n");
+					//line = bufferedReader.readLine().split(",");
 				}
 			} while (!input.equals("quit"));
 		} catch (Exception e) {

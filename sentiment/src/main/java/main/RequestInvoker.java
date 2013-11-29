@@ -11,10 +11,10 @@ public class RequestInvoker implements Runnable {
     private String key;
     private Date since, until;
     private int id;
-    private RequestDispatcher dispatcher = null;
+    private ResultPrinter printer = null;
     
-    public RequestInvoker(RequestDispatcher dispatcher, int id, String key, Date since, Date until) {
-        this.dispatcher = dispatcher;
+    public RequestInvoker(ResultPrinter printer, int id, String key, Date since, Date until) {
+        this.printer = printer;
         this.key = key;
         this.since = since;
         this.until = until;
@@ -24,6 +24,6 @@ public class RequestInvoker implements Runnable {
     @Override
     public void run() {
         double result = new Task().run(key, since, until);
-        dispatcher.print(id, key, result);
+        printer.print(id, key, result);
     }
 }
