@@ -11,7 +11,7 @@ package main;
 public class StdOutPrinter extends ResultPrinter {
 
     @Override
-    public synchronized void print(int id, String key, double result) {
+    public synchronized void printResult(int id, String key, double result) {
         System.out.print(requestID + id + ": "); 
         if(result == -1) {
             System.out.println(noTweets + key);

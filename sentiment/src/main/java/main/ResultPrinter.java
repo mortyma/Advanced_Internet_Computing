@@ -14,7 +14,7 @@ public abstract class ResultPrinter {
     protected final static String noTweets = "Error: No tweets found for ";
     protected final static String requestID = "Request ";
     
-    public abstract void print(int id, String key, double result);
+    public abstract void printResult(int id, String key, double result);
     
     public abstract void printInitiated(int id);
     

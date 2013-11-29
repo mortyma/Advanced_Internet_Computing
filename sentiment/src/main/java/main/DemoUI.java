@@ -29,7 +29,7 @@ public class DemoUI extends javax.swing.JFrame {
         initComponents();
         printer = new ResultPrinter() {
             @Override
-            public synchronized void print(int id, String key, double result) {
+            public synchronized void printResult(int id, String key, double result) {
                 txa_output.append(requestID + id + ": ");
                 System.out.print(requestID + id + ": ");
                 if (result == -1) {

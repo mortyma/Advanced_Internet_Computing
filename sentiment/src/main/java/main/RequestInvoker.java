@@ -24,6 +24,6 @@ public class RequestInvoker implements Runnable {
     @Override
     public void run() {
         double result = new Task().run(key, since, until);
-        printer.print(id, key, result);
+        printer.printResult(id, key, result);
     }
 }
