@@ -1,4 +1,4 @@
-package util;
+package sentiment.util;
 
 import java.awt.Color;
 import java.awt.Graphics;

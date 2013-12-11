@@ -2,19 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package sentiment;
 
-import classifier.ClassifierBuilder;
-import classifier.IClassifier;
-import classifier.Item;
-import classifier.WeightedMajority;
-import classifier.WekaClassifier;
+import sentiment.classifier.ClassifierBuilder;
+import sentiment.classifier.IClassifier;
+import sentiment.classifier.Item;
+import sentiment.classifier.WeightedMajority;
+import sentiment.classifier.WekaClassifier;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import junit.framework.TestCase;
-import util.Options;
+import sentiment.util.Options;
 import weka.classifiers.bayes.NaiveBayes;
 
 /**

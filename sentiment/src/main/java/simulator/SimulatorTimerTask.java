@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import main.Task;
+import cloudscale.Task;
 
 public class SimulatorTimerTask extends TimerTask {
 	private List<AnalyseRequest> requests;

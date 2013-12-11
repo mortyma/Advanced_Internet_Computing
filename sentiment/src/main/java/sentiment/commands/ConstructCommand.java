@@ -1,6 +1,6 @@
-package commands;
+package sentiment.commands;
 
-import classifier.ClassifierBuilder;
+import sentiment.classifier.ClassifierBuilder;
 
 /**
  * class representing command that constructs a classifier

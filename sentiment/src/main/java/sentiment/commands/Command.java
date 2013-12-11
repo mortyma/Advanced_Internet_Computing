@@ -1,4 +1,4 @@
-package commands;
+package sentiment.commands;
 
 public interface Command {
 	/**

@@ -1,8 +1,8 @@
-package classifier;
+package sentiment.classifier;
 
 import java.util.StringTokenizer;
 
-import util.Options;
+import sentiment.util.Options;
 
 /**
  * class that preprocess a tweet

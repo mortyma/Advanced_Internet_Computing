@@ -1,4 +1,4 @@
-package documents;
+package sentiment.documents;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import util.Options;
+import sentiment.util.Options;
 
-import classifier.Preprocesser;
+import sentiment.classifier.Preprocesser;
 
 /**
  * class representing a tweets' dataset

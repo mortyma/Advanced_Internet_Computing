@@ -1,4 +1,4 @@
-package classifier;
+package sentiment.classifier;
 
 import java.util.HashMap;
 import java.util.List;

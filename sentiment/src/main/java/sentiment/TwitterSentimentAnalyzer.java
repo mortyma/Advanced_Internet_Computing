@@ -1,4 +1,4 @@
-package twitter;
+package sentiment;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

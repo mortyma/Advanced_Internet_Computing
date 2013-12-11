@@ -1,9 +1,9 @@
-package util;
+package sentiment.util;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import classifier.WekaClassifier;
+import sentiment.classifier.WekaClassifier;
 /**
  * class to manage training options
  */

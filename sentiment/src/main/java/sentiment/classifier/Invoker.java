@@ -1,10 +1,10 @@
-package classifier;
+package sentiment.classifier;
 
-import commands.CalculateWmPrecisionCommand;
-import commands.Command;
-import commands.ConstructCommand;
-import commands.ConstructWmCommand;
-import commands.PrepareTrainCommand;
+import sentiment.commands.CalculateWmPrecisionCommand;
+import sentiment.commands.Command;
+import sentiment.commands.ConstructCommand;
+import sentiment.commands.ConstructWmCommand;
+import sentiment.commands.PrepareTrainCommand;
 
 /**
  * 

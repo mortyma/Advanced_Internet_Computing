@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package twitter;
+package sentiment;
 
+import sentiment.TwitterSentimentAnalyzer;
 import junit.framework.TestCase;
 
 /**

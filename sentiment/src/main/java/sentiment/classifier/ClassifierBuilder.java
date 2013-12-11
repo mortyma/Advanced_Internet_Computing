@@ -1,4 +1,4 @@
-package classifier;
+package sentiment.classifier;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -12,12 +12,12 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import util.ArffFileCreator;
-import util.Options;
+import sentiment.util.ArffFileCreator;
+import sentiment.util.Options;
 import weka.classifiers.Classifier;
 import weka.classifiers.functions.MultilayerPerceptron;
 
-import documents.DocumentsSet;
+import sentiment.documents.DocumentsSet;
 
 /**
  * The receiver class

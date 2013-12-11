@@ -1,4 +1,4 @@
-package util;
+package sentiment.util;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -6,7 +6,7 @@ import java.io.PrintStream;
 import java.util.LinkedList;
 import java.util.List;
 
-import documents.DocumentsSet;
+import sentiment.documents.DocumentsSet;
 /**
  * class to create arff files from a tweets' dataset
  */

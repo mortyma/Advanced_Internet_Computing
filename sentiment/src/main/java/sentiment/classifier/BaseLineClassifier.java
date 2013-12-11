@@ -1,4 +1,4 @@
-package classifier;
+package sentiment.classifier;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

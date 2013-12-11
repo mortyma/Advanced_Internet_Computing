@@ -1,4 +1,4 @@
-package documents;
+package sentiment.documents;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;

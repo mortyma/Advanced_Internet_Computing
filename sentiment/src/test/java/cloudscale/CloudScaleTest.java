@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import main.Task;
 import junit.framework.TestCase;
 
 public class CloudScaleTest extends TestCase 
