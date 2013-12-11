@@ -31,7 +31,6 @@ public class DemoUI extends javax.swing.JFrame {
             @Override
             public synchronized void printResult(int id, String key, Date since, Date until, double result) {
                 txa_output.append(requestID + id + ": ");
-                System.out.print(requestID + id + ": ");
                 if (result == -1) {
                     txa_output.append(noTweets + key + "\n");
                 } else {

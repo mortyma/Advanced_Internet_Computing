@@ -4,8 +4,6 @@
  */
 package main;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -14,8 +12,6 @@ import java.util.Date;
  */
 public class StdOutPrinter extends ResultPrinter {
 
-    
-     
     @Override
     public synchronized void printResult(int id, String key, Date since, Date until, double result) {
         System.out.print(requestID + id + ": "); 
@@ -29,8 +25,5 @@ public class StdOutPrinter extends ResultPrinter {
     @Override
     public void printInitiated(int id, String key, Date since, Date until) {
          System.out.println(getInitatedString(id, key, since, until));
-    }
-    
-    
-    
+    }   
 }
