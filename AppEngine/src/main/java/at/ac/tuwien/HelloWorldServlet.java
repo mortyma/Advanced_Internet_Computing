@@ -14,9 +14,9 @@ public class HelloWorldServlet extends HttpServlet {
   public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 	  
-	  TwitterSentimentAnalyzer analyzier = new TwitterSentimentAnalyzer();
+	 // TwitterSentimentAnalyzer analyzier = new TwitterSentimentAnalyzer();
       double value = 0;
-      value = analyzier.sentimentFor("obama", new Date(2013, 12, 01), new Date(2013, 12, 25));
+     // value = analyzier.sentimentFor("obama", new Date(2013, 12, 01), new Date(2013, 12, 25));
       
 		resp.setContentType("text/plain");
 		resp.getWriter().println("Hello, world "+value);
