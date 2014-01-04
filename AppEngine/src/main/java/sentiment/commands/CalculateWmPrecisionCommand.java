@@ -1,5 +1,5 @@
 package sentiment.commands;
-import sentiment.classifier.ClassifierBuilder;
+import classifier.ClassifierBuilder;
 
 /**
  * class representing command for calculating weighted majority classifier's precision 

@@ -1,10 +1,10 @@
 package sentiment;
 
+import at.ac.tuwien.IResourceLocator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import sentiment.Analyzer;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -19,7 +19,14 @@ import twitter4j.TwitterFactory;
 public class TwitterSentimentAnalyzer {
     
     DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
-    Analyzer analyzer = new Analyzer();
+    IAnalyzer analyzer;
+    IResourceLocator locator;
+    
+    
+    public TwitterSentimentAnalyzer(IResourceLocator locator) {
+        this.locator = locator;
+        this.analyzer = new Analyzer(locator);
+    }
     
     /**
      * Get sentiment value for the given key within the date range 'since' to 'until'
@@ -40,7 +47,6 @@ public class TwitterSentimentAnalyzer {
         if(until == null) {
             throw new IllegalArgumentException("until must not be null");
         }
-        
         return sentimentFor(key, formatter.format(since), formatter.format(until));
     }
     

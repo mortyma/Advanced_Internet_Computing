@@ -1,6 +1,6 @@
 package sentiment.commands;
 
-import sentiment.classifier.ClassifierBuilder;
+import classifier.ClassifierBuilder;
 
 /**
  * class representing command that constructs weighted majority classifier

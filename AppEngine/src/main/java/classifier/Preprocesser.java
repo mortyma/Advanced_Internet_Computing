@@ -1,4 +1,4 @@
-package sentiment.classifier;
+package classifier;
 
 import java.util.StringTokenizer;
 

@@ -1,23 +1,24 @@
 package sentiment;
 
 
-import sentiment.classifier.ClassifierBuilder;
-import sentiment.classifier.IClassifier;
-import sentiment.classifier.Item;
-import sentiment.classifier.WeightedMajority;
-import sentiment.classifier.WekaClassifier;
+import at.ac.tuwien.IResourceLocator;
+import classifier.ClassifierBuilder;
+import classifier.IClassifier;
+import classifier.Item;
+import classifier.WeightedMajority;
 
 import java.util.LinkedList;
 import java.util.List;
+import classifier.WekaClassifier;
 
 
 public class Analyzer implements IAnalyzer {
 
     WeightedMajority wm;
 
-    public Analyzer() {
+    public Analyzer(IResourceLocator locator) {
         List<IClassifier> classifiers = new LinkedList<IClassifier>();
-        ClassifierBuilder cb = new ClassifierBuilder();
+        ClassifierBuilder cb = new ClassifierBuilder(locator);
         try {
             //use pre-trained classifiers
             WekaClassifier wc1 = cb.retrieveClassifier("weka.classifiers.bayes.NaiveBayes");
@@ -28,7 +29,7 @@ public class Analyzer implements IAnalyzer {
             classifiers.add(wc3);
             wm = new WeightedMajority(classifiers);
 
-        } catch (Exception e) {
+         } catch (Exception e) {
             System.err.println("Error initializing classifiers: " + e);
             System.exit(-1);
         }

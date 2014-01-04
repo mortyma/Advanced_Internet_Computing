@@ -1,5 +1,6 @@
-package sentiment.classifier;
+package classifier;
 
+import at.ac.tuwien.IResourceLocator;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -26,9 +27,11 @@ public class ClassifierBuilder {
 	
 	DocumentsSet _ds;
 	private Options opt;
+        IResourceLocator locator;
 	
-	public ClassifierBuilder() {
+	public ClassifierBuilder(IResourceLocator locator) {
 		_ds = new DocumentsSet();
+                this.locator = locator;
 	}
 	
 	/**
@@ -119,10 +122,12 @@ public class ClassifierBuilder {
 	 * @throws ClassNotFoundException
 	 */
 	public WekaClassifier retrieveClassifier(String classifierName) throws FileNotFoundException, IOException, ClassNotFoundException {
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream("files/" + classifierName + ".model"));
-		WekaClassifier wc = (WekaClassifier)ois.readObject();
-		ois.close();
-		return wc;
+            //locator.getResource("/WEB-INF/files/" + classifierName + ".model");            
+            ObjectInputStream ois = new ObjectInputStream(locator.getResource("/WEB-INF/files/" + classifierName + ".model"));
+            WekaClassifier wc = (WekaClassifier)ois.readObject();
+            ois.close();
+            return wc;
+            //return null;
 	}
 	
 	/**

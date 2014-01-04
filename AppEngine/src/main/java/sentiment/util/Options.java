@@ -3,7 +3,7 @@ package sentiment.util;
 import java.util.LinkedList;
 import java.util.List;
 
-import sentiment.classifier.WekaClassifier;
+import classifier.WekaClassifier;
 /**
  * class to manage training options
  */
