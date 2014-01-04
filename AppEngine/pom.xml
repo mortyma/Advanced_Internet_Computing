@@ -109,6 +109,15 @@
                         <!-- in order to interpolate version from pom into appengine-web.xml -->
                         <resource>
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+                            <filtering>true</filtering>
+                            <excludes>
+                                <exclude>files/*</exclude>
+                            </excludes>
+                            <targetPath>WEB-INF</targetPath>
+                            
+                        </resource>
+                        <resource>
+                            <directory>${basedir}/src/main/webapp/WEB-INF/files</directory>
                             <filtering>false</filtering>
                             <targetPath>WEB-INF</targetPath>
                         </resource>
