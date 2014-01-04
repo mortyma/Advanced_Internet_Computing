@@ -47,7 +47,9 @@ public class TwitterSentimentAnalyzer {
         if(until == null) {
             throw new IllegalArgumentException("until must not be null");
         }
-        return sentimentFor(key, formatter.format(since), formatter.format(until));
+        //TODO: AppEngine can't call the twitter stuff
+        //return sentimentFor(key, formatter.format(since), formatter.format(until));
+        return -1;
     }
     
     /**
