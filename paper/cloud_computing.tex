@@ -29,27 +29,24 @@ Jia Wei\\
 \maketitle
 \begin{abstract}
 \end{abstract}
-
-Scalability is said to be one of the major advantages brought by the cloud paradigm and, more specifically, the one that makes it different to an “advanced outsourcing” solution~\cite{vaquero2011dynamically}.
+Cloud computing enables access to an almost unlimited amount of resources, but in order to realize this feature, the Cloud provider should be able to support the elastic deployment of the application. Elasticity, the ability to rapidly scale resources up and down on demand, is one of the main advantages brought by the cloud paradigm and make it different to an “advanced outsourcing” solution.
+However, it is difficult to understand the elasticity requirements of a given application and there are several approaches to tackle this issue. In this paper, we are aim to investigate the state of the art of elastic cloud applications. A summary of working experiment with CloudScale, as an existing approach for elastic deployment of applications on Cloud IaaS, will be discussed as well. \\
 
 \section{Introduction}
+Nowadays more and more enterprises decide to migrate to Cloud environment, in order to save the expenses of maintaining a private data center and utilize the core features of cloud computing in which resources are dynamically increased and decreased on demand, and charging is consumption based. However, public IaaS Cloud providers face serious challenges in order to to understand the elasticity characteristics of applications, and workloads while considering the capacity of their own Cloud platform. 
 
-goal: providing scalable software platforms in clouds
+Ideally a cloud platform is infinitely and instantaneously elastic. Based on this consumption, an application can be scaled out indefinitely with increasing load, and this can happen as fast as the load increases with no degradation of response times \cite{brebner2012your}. 
 
+Therefore, in this picture of an ideal Cloud, resources are available instantly and the application is immediately deployed and available for use. However, supporting this scenario, is not easy to be tackled by Cloud IaaS or PaaS provider. In this paper, we will introduce the possible solutions and approaches for this problem by considering CloudScale \cite{leitner2012cloudscale} features, advantages and disadvantages over other works as a focus of this work. We will also talk about the experiment of sentiment analysis application\footnote{$http://computerworld.com/s/article/9209140/Sentiment_analysis_comes_of_age$} on IaaS Cloud by using CloudScale and compare the solution with deploying this application on a PaaS Cloud without using any middleware such as CloudScale.
 
-\subsection{CloudScale Features}
-1. CloudScale, on the other hand, allows application developers to retain full control over their application. CloudScale applications are not bound to any specific cloud provider, are easy to migrate, work well in the context of private or hybrid clouds, and support a wider variety of applications, while still providing an abstraction comparable to commercial PaaS solutions \cite{Leitner2013}..\\
-
-2. The main disadvantage of all of those systems is that they imply a significant loss of control for the developer and also they typically require the usage of a given public cloud (typically provided by the same vendor), imply the usage of propri- etary APIs, and restrict the types of applications that are supported \cite{Leitner2013}.
-
-3. CloudScale middleware for transparently scaling applications using an IaaS cloud.
-
-4. The CloudScale approach provides a middle ground between common IaaS offerings, which provide great control over the application, but do so at the costs of high deployment effort, and PaaS offerings, which are easy to use, but provide little control. ~\cite{leitner2012cloudscale}
+The rest of paper is organized as follows. Section \ref{RW}, which is the main part of the paper, discusses the state of the art of elastic cloud application. Section \ref{cloudScale} presents the experiences of the authors with deplying an application on Cloud IaaS by using CloudScale middleware versus on PaaS directly. Finally Section \ref{conclusion} concludes the paper.
 
 
 
-\section{State of the art}
 
+\section{State of the art}{\label{rw}
+In the following we summarize the most significant works related to elastic cloud applications, based on two main categories of the existing approaches.
+At the first category, we exploit the research work in this  subject at the other category the commercial products, technologies and tool will be explained briefly. The main focus on this paper is on the first group, research area. 
 
 There are essentially two schools of thought of how one should build any distributed system. On the one hand,many approaches aim at hiding the complexity of distribution be- hind convenient abstractions, such as remote procedure call systems. On the other hand, some claim that such abstractions always have to be leaky, and, hence, should be avoided altogether. we follow the former school of thought. Essentially, CloudScale provides an abstraction that makes elastic applications running on top of an IaaS cloud seem like regular, non-distributed Java applications.
 
@@ -81,7 +78,7 @@ We can consider two main categories for the WR:
 
 (2-2) \textbf{RIM. Carina Environment Manager} \footnote{https://github.com/blackberry/OpenNebula-Carina}: It automate and speed up the deployment of services onto the OpenNebula private clouds
 
-(2-3) CA 3Teras\textbf{•} \footnote{http://www.ca.com/us/cloud-platform.aspx}: 3Teras AppLogic automates complex application deployment.
+(2-3) CA 3Teras\textbf \footnote{http://www.ca.com/us/cloud-platform.aspx}: 3Teras AppLogic automates complex application deployment.
 
 (2-4)\textbf{Aeolus} /cite{di2012towards}: Aeolus’s component model specifies compositions of services to automate deployments, planning of day-to-day activities such as software upgrade planning, service deployment, elastic scaling
  
@@ -132,12 +129,22 @@ In this paper, we more focus on the first category by investigating the scientif
 
 5. Java-based remoting: e.g.,\textbf{ Java RMI, Enterprise Java Beans} (EJB) or CORBA. These frameworks, while technically similar, provide only limited support for automated scaling. How- ever, the ideas behind the CloudScale middleware could be implemented on top of these technologies, enhancing, e.g., the CORBA remoting model with automated load balancing in the cloud.
 
+\section{CloudScale Features and Experiences} {\label{cloudScale}
+1. CloudScale, on the other hand, allows application developers to retain full control over their application. CloudScale applications are not bound to any specific cloud provider, are easy to migrate, work well in the context of private or hybrid clouds, and support a wider variety of applications, while still providing an abstraction comparable to commercial PaaS solutions \cite{Leitner2013}..\\
+
+2. The main disadvantage of all of those systems is that they imply a significant loss of control for the developer and also they typically require the usage of a given public cloud (typically provided by the same vendor), imply the usage of propri- etary APIs, and restrict the types of applications that are supported \cite{Leitner2013}.
+
+3. CloudScale middleware for transparently scaling applications using an IaaS cloud.
+
+4. The CloudScale approach provides a middle ground between common IaaS offerings, which provide great control over the application, but do so at the costs of high deployment effort, and PaaS offerings, which are easy to use, but provide little control. ~\cite{leitner2012cloudscale}
+
+
+\section{Conclusion} {\label{conclusion}
+In this paper we present the existing research and technologies for elastic Cloud application as well as the experiences that authors had with working with CloudScale as a middleware for building scaling Cloud applications transparently. 
 
 
 
-\section{Conclusion}
-
-%bibliography
+%bibliography ----------------------------------------------------------------------
 \bibliographystyle{abbrv}
 \bibliography{sigproc} 
 \end{document}
