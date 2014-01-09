@@ -47,9 +47,7 @@ public class TwitterSentimentAnalyzer {
         if(until == null) {
             throw new IllegalArgumentException("until must not be null");
         }
-        //TODO: AppEngine can't call the twitter stuff
-        //return sentimentFor(key, formatter.format(since), formatter.format(until));
-        return -1;
+        return sentimentFor(key, formatter.format(since), formatter.format(until));
     }
     
     /**
@@ -57,11 +55,12 @@ public class TwitterSentimentAnalyzer {
      * @param key
      * @param since format: YYYY-MM-DD
      * @param until format: YYYY-MM-DD
-     * @return {-1, [0,1]} with 0 indicating worst, 1 indicating best mood. 
+     * @return {-2, -1, [0,1]} with 0 indicating worst, 1 indicating best mood. 
      * -1 if no tweets for key were found
+     * -2 if an error occured while accessing tweets
      */
     public double sentimentFor(String key, String since, String until) {
-        Twitter twitter = new TwitterFactory().getSingleton();
+        Twitter twitter = new TwitterFactory().getInstance();
         int sentiment = 0, cnt = 0;
         try {
             Query query = new Query(key);
@@ -80,6 +79,7 @@ public class TwitterSentimentAnalyzer {
         } catch (TwitterException te) {
             te.printStackTrace();
             System.out.println("Failed to search tweets: " + te.getMessage());
+            return -2;
         }
         
         if(cnt == 0)
