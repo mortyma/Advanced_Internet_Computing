@@ -2,7 +2,6 @@ package at.ac.tuwien;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
 import javax.servlet.ServletContext;
 
 import javax.servlet.http.HttpServlet;
@@ -22,10 +21,12 @@ public class HelloWorldServlet extends HttpServlet implements IResourceLocator {
       
       TwitterSentimentAnalyzer analyzier = new TwitterSentimentAnalyzer(this);
       double value = 0;
-      value = analyzier.sentimentFor("obama", new Date(2013, 12, 01), new Date(2013, 12, 25));
+      String key = "merkel";
+      //TODO: using the method with java.util.Date doesn't work
+      value = analyzier.sentimentFor(key, "2014-01-01", "2014-01-08");
       
 		resp.setContentType("text/plain");
-		resp.getWriter().println("Hello, world "+value);
+		resp.getWriter().println("Sentiment for " + key + ": " +value);
 	}
 
     @Override
