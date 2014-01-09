@@ -34,8 +34,8 @@ public class TwitterSentimentAnalyzerTest extends TestCase {
      */
     public void testSentiment_Sanity() {
        TwitterSentimentAnalyzer analyzier = new TwitterSentimentAnalyzer();
-        String key = "aic";
-        double sentiment = analyzier.sentimentFor(key, "2013-11-19", "2013-11-27");
+        String key = "obama";
+        double sentiment = analyzier.sentimentFor(key, "2014-01-01", "2014-01-08");
         assertTrue(sentiment  >= 0 && sentiment <= 1);
         System.out.println("Sentiment value for " + key + ": " + sentiment);
     }

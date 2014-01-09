@@ -1,4 +1,4 @@
-package sentiment.classifier;
+package classifier;
 
 import sentiment.commands.CalculateWmPrecisionCommand;
 import sentiment.commands.Command;
