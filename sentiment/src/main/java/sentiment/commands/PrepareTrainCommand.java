@@ -2,7 +2,7 @@ package sentiment.commands;
 
 import java.io.IOException;
 
-import sentiment.classifier.ClassifierBuilder;
+import classifier.ClassifierBuilder;
 
 /**
  * class representing command that prepares the classifier's train

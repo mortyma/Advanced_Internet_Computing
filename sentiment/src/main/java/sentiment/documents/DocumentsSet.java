@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
 
 import sentiment.util.Options;
 
-import sentiment.classifier.Preprocesser;
+import classifier.Preprocesser;
 
 /**
  * class representing a tweets' dataset

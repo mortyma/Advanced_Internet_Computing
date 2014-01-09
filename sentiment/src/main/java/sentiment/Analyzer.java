@@ -2,11 +2,11 @@ package sentiment;
 
 
 import at.ac.tuwien.infosys.cloudscale.annotations.ByValueParameter;
-import sentiment.classifier.ClassifierBuilder;
-import sentiment.classifier.IClassifier;
-import sentiment.classifier.Item;
-import sentiment.classifier.WeightedMajority;
-import sentiment.classifier.WekaClassifier;
+import classifier.ClassifierBuilder;
+import classifier.IClassifier;
+import classifier.Item;
+import classifier.WeightedMajority;
+import classifier.WekaClassifier;
 
 import java.util.LinkedList;
 import java.util.List;
