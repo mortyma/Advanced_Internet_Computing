@@ -20,4 +20,14 @@
     <welcome-file-list>
         <welcome-file>SentimentAnalysis.jsp</welcome-file>
     </welcome-file-list>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>tasks</web-resource-name>
+            <url-pattern>/src/main/java/appengine/SentimentProcessorTask</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
 </web-app>
