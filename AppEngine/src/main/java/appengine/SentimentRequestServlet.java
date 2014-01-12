@@ -51,8 +51,7 @@ public class SentimentRequestServlet extends HttpServlet {
             of calculating the sentiment
         */
         Queue queue = QueueFactory.getQueue("sentiment-queue");
-        //TODO: pass along request_key
-        queue.add(withUrl("/SentimentProcessorTask").param("key", key).param("since", since).param("until", until));
+        queue.add(withUrl("/SentimentProcessorTask").param("request_key", KeyFactory.keyToString(request_key)));
        
         //TODO: give some sort of confirmation to the user
         resp.sendRedirect("/SentimentAnalysis.jsp");
