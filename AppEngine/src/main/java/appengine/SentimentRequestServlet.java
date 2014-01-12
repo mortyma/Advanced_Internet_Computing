@@ -45,6 +45,7 @@ public class SentimentRequestServlet extends HttpServlet {
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Key request_key = datastore.put(request);
         
+        //TODO: wrap db entry and task creation in transaction?
         /*
             Create a new task to do the compulationally intensitive work 
             of calculating the sentiment
