@@ -9,14 +9,10 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
-import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Query;
-import com.google.apphosting.datastore.EntityV4;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -69,7 +65,11 @@ public class SentimentProcessorTask extends HttpServlet implements IResourceLoca
 
         log.log(Level.INFO, "Sentiment for {0}: {1}", new Object[]{key, value});               
         
-        //TODO: write to datastore       
+        /*
+            Store result
+        */
+        request.setProperty("result", value);
+        datastore.put(request);
         
     }
 
