@@ -1,6 +1,6 @@
 package sentiment;
 
-import at.ac.tuwien.IResourceLocator;
+import appengine.IResourceLocator;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;

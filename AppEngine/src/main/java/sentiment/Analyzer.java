@@ -1,7 +1,7 @@
 package sentiment;
 
 
-import at.ac.tuwien.IResourceLocator;
+import appengine.IResourceLocator;
 import classifier.ClassifierBuilder;
 import classifier.IClassifier;
 import classifier.Item;

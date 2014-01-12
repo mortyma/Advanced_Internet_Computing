@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import sentiment.Analyzer;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
