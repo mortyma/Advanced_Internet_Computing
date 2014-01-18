@@ -3,8 +3,8 @@
 \begin{document}
 
 \title{An Overview of Elastic Cloud Applications}
-\subtitle{Technical University of Vienna,\\Advanced Internet Computing,\\
-(Jan 2013)}
+\subtitle{Technical University of Vienna,\\Advanced Internet Computing Lecture,\\
+(Jan 2014)}
 
 
 \numberofauthors{4}
@@ -31,7 +31,9 @@ Jia Wei\\
 \end{abstract}
 \noindent
 Cloud computing enables access to an almost unlimited amount of resources, but in order to realize this feature, the Cloud provider should be able to support the elastic deployment of applications. Elasticity, the ability to rapidly scale resources up and down on demand, is one of the main advantages brought by the cloud paradigm and makes it different to an “advanced outsourcing” solution.
-However, there are various challenges to understand the elasticity requirements of a given application and  several approaches try to tackle this issues. In this paper, we are aim to investigate the state of the art of elastic cloud applications in one hand and on the other hand, explain a summary of working experiment with CloudScale, as a middleware to build elastic applications on Cloud IaaS. We also provide the comparison result of deployment the same application, twitter-based sentiment analysis, on top of an IaaS (Amazon EC2\footnote{http://aws.amazon.com/ec2/}) by using CloudScale and without it on a PaaS (Google AppEngine \footnote{https://developers.google.com/appengine/}).  \\
+However, there are various challenges to understand the elasticity requirements of a given application and  several approaches try to tackle this issues. In this paper, we are aim to investigate the state of the art of elastic cloud applications in one hand and on the other hand, describe the requirements for supporting elasticity on Cloud. 
+It is because the authors had a working experiment with CloudScale \cite{leitner2012cloudscale}, \cite{Leitner2013} in order to compare the process of deployment an application, twitter-based sentiment analysis, on top of an IaaS (Amazon EC2\footnote{http://aws.amazon.com/ec2/}) by using CloudScale and without using it directly on a PaaS (Google AppEngine \footnote{https://developers.google.com/appengine/}).
+
 
 \section{Introduction}
 \noindent
@@ -41,119 +43,72 @@ Ideally a cloud platform is infinitely and instantaneously elastic. Based on thi
 
 Therefore, in this picture of an ideal Cloud, resources are available instantly and the application is immediately deployed and available to be used. However, supporting this scenario, is not easy to be tackled by Cloud IaaS or PaaS provider. In this paper, we introduce the existing approaches for this problem by considering CloudScale \cite{leitner2012cloudscale} features, advantages and disadvantages over other works as a focus of this work. We will also talk briefly about an experimental comparison between the deployment of a twitter-based sentiment analysis application on Amazon EC2 as a public Cloud IaaS by CloudScale with the deployment of it on Google AppEngine as a public Cloud PaaS without utilizing the CloudScale features as a middleware. It is worth mentioning that, although elasticity is interpreted as the capability of both scaling up and down, while scalability more is used for scaling up, in this paper we used them interchangeable,.
 
-The rest of paper is organized as follows. Section \ref{RW}, which is the main focus of the paper, discusses the state of the art of elastic cloud applications. Section \ref{cloudScale} presents the experiences of the authors with deploying an application on Amazon EC2 by using CloudScale as a middleware versus on Google AppEngine directly. Finally, Section \ref{conclusion} concludes the paper.
+The rest of paper is organized as follows. Section \ref{elasticity-req} discusses the possible ways to provide elastic applications on Cloud and the essential features to support it is explained. Then in Section \ref{RW}, which is the main focus of the paper, the state of the art of elastic cloud applications will be presented in two categories, research work and commercial tools and technologies. In Section \ref{cloudScale} the differences between CloudScale, as a tool which authors had experienced with, and other similar approaches is introduced briefly. Finally, Section \ref{conclusion} concludes the paper.
 
-\section{State of the art}{\label{rw}
-In the following, we summarize the most significant works related to elastic cloud applications, based on two main categories of the existing approaches.
-At the first category, we exploit the research work in this subject, while the next part the most significant commercial products, technologies and tools regarding to elastic Cloud application will be introduced. The main focus on this paper is on the research work.
+\section{Elasticity Requirements} \label{elasticity-req}
 
 Talking generally, based on \cite{vaquero2011dynamically} IaaS or PaaS automatic elasticity is typically achieved in Cloud by using a set of provider-defined rules that govern how and when the service should scales up or down to adapt to a variable deployed application load. Actually, these rules are a set of conditions that when met, triggers some actions on the infrastructure or platform in order to support automatic elasticity. The abstraction level of this process for the user, the customization of rules and the degree of automation are different among existing approaches.
 
 For example, some approaches make it possible for users to build some simple conditions by using fixed infrastructure or platform metrics such as CPU, memory, while other approaches offers service level metrics such as cost to benefit ratio in order to support more complex conditions which are combinations of simple rules.
-
 Another aspect that existing approaches are different in is the way they behave when the supported conditions are met. Figure \ref{fig:scalabilitymechanisms}\cite{vaquero2011dynamically} simply shows possible mechanisms of how existing approaches support the elasticity on the level of cloud IaaS or PaaS.
 
-Service horizontal scaling can be devided to two sub-categories, whether dding new server replicas and load balancers to distribute load among all available replicas, or dynamic bandwidth allocation by supporting network scaling. Vertical scaling can be achieved by changing the instances on-the-fly (without rebooting) whether by resizing (e.g. dedicated more physical resources such as CPU and RAM to a running virtual machine) or replacing. However, on-the-fly changes on the available resources of a virtual machine is not supported by the most common operating systems. Some work like \cite{rodero2010infrastructure} tried to facilitate this process by proposing a new abstraction layer closer to the lifecycle of services that allows for their automatic deployment and escalation depending on the service status (not only on the infrastructure). Their proposed abstraction layer sits on top of different cloud providers, hence mitigating the potential lock-in problem and allowing the transparent federation of clouds for the execution of services.
+Service horizontal scaling can be divided to two sub-categories, whether adding new server replicas and load balancers to distribute load among all available replicas, or dynamic bandwidth allocation by supporting network scaling. Vertical scaling can be achieved by changing the instances on-the-fly (without rebooting) whether by resizing (e.g. dedicated more physical resources such as CPU and RAM to a running virtual machine) or replacing. However, on-the-fly changes on the available resources of a virtual machine is not supported by the most common operating systems. Some work like \cite{rodero2010infrastructure} tried to facilitate this process by proposing a new abstraction layer closer to the lifecycle of services that allows for their automatic deployment and escalation depending on the service status (not only on the infrastructure). Their proposed abstraction layer sits on top of different cloud providers, hence mitigating the potential lock-in problem and allowing the transparent federation of clouds for the execution of services.
 
-Apart from supporting server scalability, some other characteristics need to be considered that affect the overall application scaling potential such as load balancers and related algorithms. Load balancer is needed to support the aggregation of new servers (typically in the form of new VMs) to be able to distribute load among several servers. As a commercial public Cloud IaaS provider, Amazon already have some strategies for load balancing of replicated VMs via the Elastic Load Balancing capabilities \footnote{http://aws.amazon.com/autoscaling/}. 
-
-Therefore, having several servers and the mechanisms to distribute load among them is a certain step towards scaling a cloud application \cite{rodero2010infrastructure}. However, network scalability is to be said a neglected element that should also be considered \cite{wu2009unified} for Cloud datacenters in order to be able to support application elasticity. It is because several VMs share the same network, potentially producing a huge increase in the required bandwidth. 
-
-Regarding to Figure \ref{fig:scalabilitymechanisms}, the aforementioned CloudScale middleware as well as as well as Aneka\footnote{http://www.manjrasoft.com/products.html} and AppScale\footnote{http://www.appscale.com}, while will be introduced later, fall into "container replication" category in the platform layer (the container being CloudScale in this case) 
+Apart from supporting server scalability, some other characteristics need to be considered that affect the overall application scaling potential such as load balancers and related algorithms. Load balancer is needed to support the aggregation of new servers (typically in the form of new VMs) to be able to distribute load among several servers. As a commercial public Cloud IaaS provider, Amazon already have some strategies for load balancing of replicated VMs via the Elastic Load Balancing capabilities \footnote{http://aws.amazon.com/autoscaling/}. Therefore, having several servers and the mechanisms to distribute load among them is a certain step towards scaling a cloud application \cite{rodero2010infrastructure}. However, network scalability is to be said a neglected element that should also be considered \cite{wu2009unified} for Cloud datacenters in order to be able to support application elasticity. It is because several VMs share the same network, potentially producing a huge increase in the required bandwidth. 
+Regarding to Figure \ref{fig:scalabilitymechanisms}, the aforementioned CloudScale middleware as well as as well as Aneka\footnote{http://www.manjrasoft.com/products.html} and AppScale\footnote{http://www.appscale.com}, while will be introduced later, fall into "container replication" category in the platform layer (the container is CloudScale here).
 
 \begin{figure*}
 \centering
-\epsfig{file=figures/ScalabilityMechanisms.png, , width = 12.5cm}
+\epsfig{file=figures/ScalabilityMechanisms.png, , width = 10.5cm}
 \caption{Possible mechanisms to support elasticity on Cloud IaaS/PaaS ~\cite{vaquero2011dynamically}}
 \label{fig:scalabilitymechanisms}
 \end{figure*}
 
-\subsection{Container-level Scalability}
-This category is like CloudScale approach (description of this kind of approach is described in \cite{vaquero2011dynamically}.
+\section{State of the art}{\label{rw}
+In the following, we summarize the most significant works which support elastic Cloud applications, based on two main categories of the existing approaches.
+At the first category, we exploit the research work in this subject, while the next part the most significant commercial products, technologies and tools regarding to elastic Cloud application will be introduced.
 
-Aneka \cite{vecchiola2009aneka}: For high loads, and to avoid overprovisioning of resources, it would be useful to be able to federate clouds so components can be run in external/public clouds if needed. Aneka is able to deploy containers and run users applications in several IaaS providers \cite{vaquero2011dynamically}. 
-
-AppScale \cite{chohan2009appscale}: Platforms will require container replicas to be deployed or released dynamically to handle load variations. AppScale can scale the VMs used to host containers depending on actual application demand, automatically configuring the load balancers \cite{vaquero2011dynamically}. 
-
-
-We can consider two main categories for the WR: 
 \subsection{Related Research (scientific approaches)}
+Authors of \cite{keller2013topology} proposes a framework contributes by describing neces-
+sary interfaces, functionalities, and data exchanges to deploy complex application across several Cloud IaaS, such as Amazon EC2 in a dynamic and adaptive way. In the other world, they answer the question of "How to deploy elastic applications?" by presenting a flexible framework that supports high-level interfaces for an adaptation plug-in. These interfaces simplify the retrieval of necessary input data for all placement algorithms support state-full applications, or complex application architectures.
 
-(1) paper \cite{miranda2012enough} (MDA): Enough about standardization, let's build cloud applications
+In \cite{di2012towards} Aeolus component model is proposed to capture similar scenario from realistic cloud deployments, and specifies compositions of services to automate deployments, planning of day-to-day activities such as software upgrade planning, service deployment, and elastic scaling.
 
-(2) paper \cite{keller2013topology}:(cite CloudScale) A topology-aware adaptive deployment framework for elastic applications 
+Work presented in \cite{brebner2012your} introduces an elasticity mechanisms of a typical Cloud IaaS platform (inspired by Amazon EC2) and presents a Service Oriented Performance Modeling method and tool to model and predict the elasticity characteristics of three realistic applications and workloads on this cloud platform. They compare the pay-as-you-go instance costs and end-user response time for these three elasticity scenarios. Their proposed model is able to predict the elasticity requirements (in terms of the maximum instance spin-up time) for the working scenarios.
 
-(2-1) \textbf{Ubuntu Juju }\footnote{https://juju.ubuntu.com/}: Basic services are described as predefined charms
+The OSGi-inspired component framework COSCA presented in \cite {kachele2013component} auto- matically manages elastic deployment of component-based application by isolating components of different applications and hides distribution using a virtualized and distributed OSGi-like framework. It eases the usage of cloud resources and scalability for component-based applications. 
 
-(2-2) \textbf{RIM. Carina Environment Manager} \footnote{https://github.com/blackberry/OpenNebula-Carina}: It automate and speed up the deployment of services onto the OpenNebula private clouds
+The authors of \cite{han2012lightweight} adopts a lightweight approach along with its algorithm to enable cost-effective elasticity for cloud applications. The proposed approach operates fine-grained scaling at the resource level (CPUs, memory, I/O) in addition to VM-level scaling to efficiently scale cloud application’s resources up and down in order to meet the given QoS requirements while reducing cloud providers’ costs.
 
-(2-3) CA 3Teras\textbf \footnote{http://www.ca.com/us/cloud-platform.aspx}: 3Teras AppLogic automates complex application deployment.
-
-(2-4)\textbf{Aeolus} /cite{di2012towards}: Aeolus’s component model specifies compositions of services to automate deployments, planning of day-to-day activities such as software upgrade planning, service deployment, elastic scaling
- 
-(3)Is your cloud elastic enough?: performance modelling the elasticity of infrastructure as a service (IaaS) cloud applications \cite{brebner2012your}
-
-(4)Component-based scalability for cloud applications \cite {kachele2013component}
-
-(5)Look up!: your future is in the cloud \cite{larus2013look}
-
-(6)Orleans: cloud computing for everyone \cite{bykov2011orleans}
-
-(7)Lightweight Resource Scaling for Cloud Applications \cite{han2012lightweight}
- 
-\textbf{Aneka} is a .NET-based platform with a focus on enabling hybrid cloud applications. Unlike CloudScale, Aneka is more akin to traditional Grid computing middleware, providing a relatively low-level abstraction based on the message passing interface (MPI). In general, Aneka seems suitable for building scientific computing applications, but less so for enterprise applications ~\cite{Leitner2013}
-
-\textbf{AppScale}, on the other hand, specifi- cally (and exclusively) targets Online Transaction Processing (OLTP) style enterprise applications ~\cite{Leitner2013}.
- 
-another platform with a focus on data processing has been proposed by the BOOM research project [4]. BOOM builds on a custom, declarative programming model and is clearly geared towards data analytics ~\cite{Leitner2013}..
-
-The main contribution of CloudScale over all of these models is that Cloud- Scale has amore general claim, and is able to handle a wide variety of elastic application types, including data-intense, processing-intense and OLTP style web applications ~\cite{Leitner2013}.. 
-
-The European commission funded project \textbf{Contrail} [2] is currently building another PaaS for hosting relatively flexi- ble elastic applications, called ConPaaS [28] (Contrail PaaS). ConPaaS supports web and high-performance applications built in Java or PHP, and can be used in combination with Amazon EC2 or an OpenNebula private cloud. However, ConPaaS seems to operate on a lower level of abstraction than CloudScale. This PaaS environment consists of elas- tically hostedWeb services, such as web or database servers, and mostly integrates existing stand-alone components \cite{Leitner2013}.
-
+%--------------------------------------------------------
 
 \subsection{Related tools and commercial approaches}
+Several application provisioning solutions exist, enabling developers and administrators to declaratively specify deployment requirements and dependencies to support repeatable and managed resource provisioning such as Opscode Chef \footnote{www.opscode.com/chef/}, Puppet\footnote{http://puppetlabs.com} and juju\footnote{http://juju.ubuntu.com}. In juju basic services are described as predefined charms and it can fall into the category in which it supports elastic applications by providing help, hints, or triggers.
+ 
+Aneka \cite{vecchiola2009aneka} is a .NET-based platform that focuses on enabling hybrid cloud applications by employing a specialized programming model. It is able to deploy containers and run users applications in several IaaS providers. Aneka is more similar to Grid computing middleware, provides a relatively low-level abstraction based on the message passing interface (MPI). In general, Aneka seems more suitable for building scientific computing applications instead of enterprise applications. 
 
-A service particularly related to our work is \textbf{CloudBees RUN@Cloud} \footnote{http://www.cloudbees.com/}, which provides continuous integration and an elastic platform for hosting Enterprise Java Beans (EJB) applications \cite{Leitner2013}.
+AppScale \cite{chohan2009appscale} is an open source extension to the Google Ap-
+p Engine (GAE) PaaS that allows users to build their own GAE compliant PaaS on top of any private or public IaaS service. Indeed, it provides a framework to investigate the interaction between PaaS and IaaS systems. In order to support the elasticity, it scales the VMs used to host containers depending on actual application demand, automatically configuring the load balancers. It targets Online Transaction Processing (OLTP) style enterprise applications.
 
-Other PaaS of- ferings that support the Java programming language include the well-known GAE, Amazon’s Elastic Beanstalk services, or Microsoft’s Azure \cite{Leitner2013}. 
+Carina Environment Manager\footnote{https://github.com/blackberry/OpenNebula-Carina} automates and speeds up the deployment of services onto the OpenNebula IaaS platform. It supports the automated creation and run-time scaling of multi-VM application environments according to policies. It leverages the OpenNebula contextualization framework to setup clusters of VMs in a master-slave configuration or a set of workers with an IP load-balancer in front. Policies can be defined to control how VMs are added or removed based on manual, time of day, or application load-based triggers.
 
-Outside of the Java world,\textbf{ Heroku} is gaining traction as a provider of PaaS for dynamic scripting languages, such as Ruby or Python\footnote{https://www.heroku.com/} \cite{Leitner2013}.
+3Teras AppLogic\footnote{http://www.ca.com/us/cloud-platform.aspx} in another commercial tools to automate complex application deployment. It scales applications without changing code and architecture. Indeed, it provides an on demand scaling by assigning resources to the service as a single entity, rather than a collection of components.
 
-AppScale can be also considered as a commercial product and it allows users to build their own GAE compliant PaaS on top of any private or public IaaS service. We consider this system a significant step forward in comparison to other vendors \cite{Leitner2013}.
+Orleans, introduced in \cite{larus2013look} and \cite{bykov2011orleans} is a software framework developed at Microsoft Research to build reliable, scalable, and elastic cloud applications. It includes programming model that encourages the use of simple, easy to understand and employ concurrency patterns. 
+It is based on distributed actor-like components called grains, which are isolated units of state and computation that communicate through asynchronous messages. Orleans enables a developer to concentrate on application logic, while the Orleans runtime provides scalability, availability, and reliability.
 
-Many core features and terms of CloudScale, as introduced in Section 3.1, are akin to well-known Java remote procedure call technology, e.g., Java RMI or EJB. How- ever, note that the main contribution of CloudScale is not in enabling remoting (as RMI and EJB do), but rather in enabling elasticity. Hence, the actual conceptual overlap between CloudScale and these frameworks is not particularly large.
-In this paper, we more focus on the first category by investigating the scientific state of the art in elastic cloud applications, while just introduce some existing tools and technologies for the second category \cite{Leitner2013}.
+CloudBees RUN@Cloud\footnote{http://www.cloudbees.com/} is a service which provides continuous integration and an elastic platform for hosting Enterprise Java Beans (EJB) applications.
 
+%-----------------------------------------------------------------------------------
+\section{CloudScale Features} {\label{cloudScale}
+In this section, very briefly, we enumerate the features of CloudScale and compare it with the previous introduced approaches in Section \ref{rw}.
 
+CloudScale is a middleware to build applications on top of Cloud IaaS. It provides an abstraction that makes elastic applications running on top of an IaaS seem like regular, non-distributed Java applications. Indeed, it places a middle layer between IaaS offerings, which provide great control over the application, but do so at the costs of high deployment effort, and PaaS offerings, which are easy to use, but provide little control \cite{leitner2012cloudscale}. It allows application developers to have full control over their application, while by using a PaaS, they cannot retain it. Another advantages of using CloudScale is providing an abstract layer by which applications are not bound to any specific cloud providers, and are easy to migrate, work well in the context of private or hybrid clouds, and support a wider variety of applications, while still providing an abstraction comparable to commercial PaaS solutions. CloudScale has a more general claim in comparision with similar approached for elastic applications, which is able to handle a wide variety of elastic application types, including data-intense, processing-intense and OLTP\footnote{Online Transaction Processing} style web applications\cite{Leitner2013}.
 
-\subsection{Other aspects}
-1. efficiently deploying applications in the cloud
-
-2. distributed deployment and hosting of (Java) applications: most replicating and clustering of \textbf{Enterprise Java Beans} (EJB) implementations lack the dynamism of CloudScale, and do not provide resource management strategies or transparent code distribution \cite{leitner2012cloudscale}.
-
-3. Specialized programming models: \textbf{Aneka} is a platform for deployment of .NET-based applications, employing a specialized programming model. The BOOM initiative at UC Berkeley aims at simplifying declarative programming for the cloud. Whereas BOOM is mostly suited for data analytics, Cloud- Scale is targeted at general-purpose programming and deployment of arbitrary Java applications \cite{leitner2012cloudscale}. 
-
-4. PaaS and SaaS: From a technical viewpoint, these providers do little more than allowing scalable remote access to existing software developing platforms, enriched with rich user interface and Web 2.0 experience; The main difference between CloudScale and those commercial SaaS and PaaS solutions is that, when using CloudScale, developers retain full control over their application. That is, even though CloudScale hides some scalability-related issues from developers, they are still free to customize the way CloudScale works to their own needs, either by implementing customscaling policies, adapting the CloudScale framework itself, or managing some COs in the application manually \cite{leitner2012cloudscale}. 
-
-5. Java-based remoting: e.g.,\textbf{ Java RMI, Enterprise Java Beans} (EJB) or CORBA. These frameworks, while technically similar, provide only limited support for automated scaling. How- ever, the ideas behind the CloudScale middleware could be implemented on top of these technologies, enhancing, e.g., the CORBA remoting model with automated load balancing in the cloud.
-
-\section{CloudScale Features and Experiences} {\label{cloudScale}
-CloudScale provides an abstraction that makes elastic applications running on top of an IaaS cloud seem like regular, non-distributed Java applications.
-
-1. CloudScale, on the other hand, allows application developers to retain full control over their application. CloudScale applications are not bound to any specific cloud provider, are easy to migrate, work well in the context of private or hybrid clouds, and support a wider variety of applications, while still providing an abstraction comparable to commercial PaaS solutions \cite{Leitner2013}..\\
-
-2. The main disadvantage of all of those systems is that they imply a significant loss of control for the developer and also they typically require the usage of a given public cloud (typically provided by the same vendor), imply the usage of propri- etary APIs, and restrict the types of applications that are supported \cite{Leitner2013}.
-
-3. CloudScale middleware for transparently scaling applications using an IaaS cloud.
-
-4. The CloudScale approach provides a middle ground between common IaaS offerings, which provide great control over the application, but do so at the costs of high deployment effort, and PaaS offerings, which are easy to use, but provide little control. ~\cite{leitner2012cloudscale}
-
+Based on \cite{leitner2012cloudscale} the main difference between CloudScale and the introduced approached in Section \ref{rw} are by using CloudScale, developers retain full control over their application. Although CoudScale hides some scalability-related issues from developers, they are still free to customize the way CloudScale works to their own needs, either by implementing customscaling policies, adapting the CloudScale framework itself, or managing some so called Cloud-Objects (regular program-level objects that are abstractions of application logics, and should be distributed over a cloud) in the application manually. The main disadvantage of all of those approaches is that they imply a significant loss of control for the developer and also they typically require the usage of a given public cloud (typically provided by the same vendor), imply the usage of proprietary APIs, and restrict the types of applications that are supported \cite{Leitner2013}.
 
 \section{Conclusion} {\label{conclusion}
-In this paper we present the existing research and technologies for elastic Cloud application as well as the experiences that authors had with working with CloudScale as a middleware for building scaling Cloud applications transparently. 
-
-
+In this paper we present the state of the art in elastic Cloud application which include both existing research work and technologies. We also took a look at requirements of supporting elasticity on Cloud. As the authors had experienced with deploying twitter-based sentiment analysis application on IaaS by interfering of CloudScale and without it directly on Google AppEngine, advantages of using CloudScale over existing approaches were discussed briefly as well.
 
 %bibliography ----------------------------------------------------------------------
 \bibliographystyle{abbrv}
