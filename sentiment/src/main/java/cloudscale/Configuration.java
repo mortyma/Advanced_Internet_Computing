@@ -31,12 +31,14 @@ public class Configuration
       	EC2CloudPlatformConfiguration cloudPlatformConfiguration = new EC2CloudPlatformConfiguration();
 		cloudPlatformConfiguration.setAwsConfigFile("ec2.props");
 		cloudPlatformConfiguration.setAwsEndpoint("ec2.sa-east-1.amazonaws.com");
+		cloudPlatformConfiguration.setInstanceType("t1.micro");
+		cloudPlatformConfiguration.setSshKey("aic13-team3-group6_MQServer.ppk");
       
 
 	      return CloudScaleConfigurationBuilder
 			.createLocalConfigurationBuilder(new HostPerObjectScalingPolicy(), Level.INFO)
-	              .with(cloudPlatformConfiguration).withMQServer("ec2-54-207-29-204.sa-east-1.compute.amazonaws.com", 61616)
-			.withGlobalLoggingLevel(Level.ALL)
+	         .with(cloudPlatformConfiguration).withMQServer("ec2-54-207-29-204.sa-east-1.compute.amazonaws.com", 61616)
+			.withGlobalLoggingLevel(Level.SEVERE)
 	         .withMonitoring(true)
 	         .build();
 	}

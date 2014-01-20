@@ -4,6 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import at.ac.tuwien.infosys.cloudscale.annotations.FileDependency;
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
@@ -15,10 +17,17 @@ import twitter4j.TwitterFactory;
  * Perform sentiment analysis on tweets
  * @author martin
  */
+@FileDependency(files = {"twitter4j.properties"})
 public class TwitterSentimentAnalyzer {
     
     DateFormat formatter = new SimpleDateFormat("yyyy-mm-dd");
     Analyzer analyzer = new Analyzer();
+    
+    
+    public TwitterSentimentAnalyzer()
+    {
+
+    }
     
     /**
      * Get sentiment value for the given key within the date range 'since' to 'until'
