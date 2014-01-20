@@ -14,7 +14,7 @@ public class Configuration
 	@CloudScaleConfigurationProvider
 	public static CloudScaleConfiguration getConfiguration()
 	{	
-		return getEC2Configuration();
+		return getLocalConfiguration();
 	}
 	
 	private static CloudScaleConfiguration getLocalConfiguration()
@@ -30,14 +30,15 @@ public class Configuration
 	{
       	EC2CloudPlatformConfiguration cloudPlatformConfiguration = new EC2CloudPlatformConfiguration();
 		cloudPlatformConfiguration.setAwsConfigFile("ec2.props");
+		cloudPlatformConfiguration.setAwsEndpoint("ec2.sa-east-1.amazonaws.com");
       
 
 	      return CloudScaleConfigurationBuilder
 			.createLocalConfigurationBuilder(new HostPerObjectScalingPolicy(), Level.INFO)
 	              .with(cloudPlatformConfiguration).withMQServer("ec2-54-207-29-204.sa-east-1.compute.amazonaws.com", 61616)
 			.withGlobalLoggingLevel(Level.ALL)
-	              .withMonitoring(true)
-	              .build();
+	         .withMonitoring(true)
+	         .build();
 	}
 	
 	
@@ -57,7 +58,7 @@ public class Configuration
 		.withMonitoring(true)
 		.build();
 //		configuration.common().clientLogging().setDefaultLoggingLevel(Level.ALL);
-//		configuration.common().setCommunicationConfiguration(messageQueueConfig);
+		configuration.common().setCommunicationConfiguration(messageQueueConfig);
 		
 		return configuration;
 	}

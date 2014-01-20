@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import at.ac.tuwien.infosys.cloudscale.annotations.FileDependency;
+import cloudscale.MyDependencyProvider;
+
 /**
  * class representing weighted majority classifier
  */
+@FileDependency(dependencyProvider=MyDependencyProvider.class)
 public class WeightedMajority {
 	
 	private Map<Integer, IClassifier> _id2cl;

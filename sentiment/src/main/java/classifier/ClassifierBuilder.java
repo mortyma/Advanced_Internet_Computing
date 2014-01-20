@@ -22,6 +22,7 @@ import sentiment.documents.DocumentsSet;
 /**
  * The receiver class
  */
+
 public class ClassifierBuilder {
 	
 	DocumentsSet _ds;
