@@ -16,32 +16,90 @@
 
 <html>
 
-  <body>
+<head>
 
+<link type="text/css" href="stylesheets/table.css" rel="stylesheet" />
+<link type="text/css" href="stylesheets/datepicker.css" rel="stylesheet" />
+
+<script type="text/javascript" src="datepickr.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.tablesorter.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#tbmain").tablesorter();
+ 
+});
+</script>
+
+</head>
+
+<body>
+
+<div align="center">
+<h1>AIC WS2013 Group 3</h1>
+</div>
+
+<div align="center">
 <form action="/SentimentRequest" method="post">
     <div>
-    Key: <input type="text" name="key"><br>
-    Since: <input type="text" name="since"><br>
-    Until: <input type="text" name="until"><br>
+    <table>
+    <tr>
+        <td align="right">Key:</td>
+        <td><input type="text" name="key"></td>
+    </tr>
+    <tr>
+        <td align="right">Since:</td>
+        <td>
+        <input type="text" id="dp1" name="since">
+        <script type='text/javascript'>
+   
+            new datepickr('dp1', {
+    				'dateFormat': 'Y/m/d'
+    		});
+   
+        </script>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">Until:</td>
+        <td>
+        <input type="text" id="dp2" name="until">
+        <script type='text/javascript'>
+   
+            new datepickr('dp2', {
+    				'dateFormat': 'Y/m/d'
+    		});
+   
+        </script>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="right"><input type="submit" value="Analyze" /></td>
+    </tr>
+    </table>
     </div>
-    <div><input type="submit" value="Analyze" /></div>
 </form>
+</div>
 
-<table width="100%" border="1">
+<div align="center">
+<table id="tbmain" class="tablesorter">
 <%
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     //TODO: use ancestor query?
     Query query = new Query(); //.addSort("key", Query.SortDirection.ASCENDING);
     List<Entity> requests = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
     %>
+    <thead>
     <tr>
-        <td>Key</td>      
-        <td>Since</td>      
-        <td>Until</td>      
-        <td>Result</td>      
+        <th width="100">Key</th>      
+        <th width="200">Since</th>      
+        <th width="200">Until</th>      
+        <th width="400">Result</th>      
     </tr>
-    
-    
+    </thead>
+    <tbody>
     <%
     for(int i = 0; i < requests.size(); i++)
     {
@@ -55,9 +113,10 @@
         </tr>
         <% 
     }
-%>
+    %>
+    </tbody>
 </table>
+</div>      
       
-      
-  </body>
+</body>
 </html>
