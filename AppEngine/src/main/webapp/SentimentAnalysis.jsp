@@ -55,7 +55,7 @@ $(document).ready(function(){
         <script type='text/javascript'>
    
             new datepickr('dp1', {
-    				'dateFormat': 'Y/m/d'
+    				'dateFormat': 'Y-m-d'
     		});
    
         </script>
@@ -68,7 +68,7 @@ $(document).ready(function(){
         <script type='text/javascript'>
    
             new datepickr('dp2', {
-    				'dateFormat': 'Y/m/d'
+    				'dateFormat': 'Y-m-d'
     		});
    
         </script>
@@ -82,7 +82,7 @@ $(document).ready(function(){
     </div>
 </form>
 </div>
-
+<br>
 <div align="center">
 <table id="tbmain" class="tablesorter">
 <%
