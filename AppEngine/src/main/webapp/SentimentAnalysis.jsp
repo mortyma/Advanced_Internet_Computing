@@ -30,6 +30,17 @@ $(document).ready(function(){
     $("#tbmain").tablesorter();
  
 });
+
+function checkStatus(did){
+	$.post( "SentimentCheckTaskStatus",{id:did} ,function( data ) {
+		alert( "" + data );
+		window.location.reload();
+		});
+}
+
+function refresh(){
+	window.location.reload();
+}
 </script>
 
 </head>
@@ -76,7 +87,7 @@ $(document).ready(function(){
     </tr>
     <tr>
         <td></td>
-        <td align="right"><input type="submit" value="Analyze" /></td>
+        <td align="right"><input type="submit" value="Analyze"/></td>
     </tr>
     </table>
     </div>
@@ -89,7 +100,7 @@ $(document).ready(function(){
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     //TODO: use ancestor query?
     Query query = new Query(); //.addSort("key", Query.SortDirection.ASCENDING);
-    List<Entity> requests = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(5));
+    List<Entity> requests = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(20));
     %>
     <thead>
     <tr>
@@ -104,19 +115,31 @@ $(document).ready(function(){
     for(int i = 0; i < requests.size(); i++)
     {
         Entity e = requests.get(i);
+        if(e.getProperty("result")==null){%>
+        	<script type="text/javascript">
+        	   checkStatus("<%= e.getProperty("key") %>");
+        	</script>
+        	<%
+        }
         %>
         <tr>
             <td><%= e.getProperty("key") %></td>
             <td><%= e.getProperty("since") %></td>
             <td><%= e.getProperty("until") %></td>
-            <td><%= e.getProperty("result") %></td>
+            <td><%= e.getProperty("result")==null?"computing...":e.getProperty("result") %></td>
         </tr>
         <% 
     }
     %>
     </tbody>
 </table>
+
+<br>
+<input type="button" value="refresh" onclick="refresh()"/>
+
 </div>      
+
+
       
 </body>
 </html>

@@ -8,6 +8,10 @@
         <servlet-name>SentimentProcessorTask</servlet-name>
         <servlet-class>appengine.SentimentProcessorTask</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SentimentCheckTaskStatus</servlet-name>
+        <servlet-class>appengine.SentimentCheckTaskStatus</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SentimentRequest</servlet-name>
         <url-pattern>/SentimentRequest</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>SentimentProcessorTask</servlet-name>
         <url-pattern>/SentimentProcessorTask</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SentimentCheckTaskStatus</servlet-name>
+        <url-pattern>/SentimentCheckTaskStatus</url-pattern>
     </servlet-mapping>
     
     <welcome-file-list>

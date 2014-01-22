@@ -12,10 +12,15 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
+
 import static com.google.appengine.api.taskqueue.TaskOptions.Builder.*;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.logging.Logger;
+
 import javax.servlet.http.*;
+
 import java.util.logging.Level;
 
 public class SentimentRequestServlet extends HttpServlet {
@@ -42,6 +47,7 @@ public class SentimentRequestServlet extends HttpServlet {
         request.setProperty("key", key);
         request.setProperty("since", since);
         request.setProperty("until", until);
+        request.setProperty("result", null);
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Key request_key = datastore.put(request);
         
@@ -52,8 +58,13 @@ public class SentimentRequestServlet extends HttpServlet {
         */
         Queue queue = QueueFactory.getQueue("sentiment-queue");
         queue.add(withUrl("/SentimentProcessorTask").param("request_key", KeyFactory.keyToString(request_key)));
-       
+   
+        
         //TODO: give some sort of confirmation to the user
         resp.sendRedirect("/SentimentAnalysis.jsp");
+        
+        
+        
+        
     }
 }

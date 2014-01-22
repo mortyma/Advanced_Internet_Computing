@@ -11,14 +11,18 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import sentiment.TwitterSentimentAnalyzer;
 
 /**
@@ -40,36 +44,46 @@ public class SentimentProcessorTask extends HttpServlet implements IResourceLoca
          */
         context = req.getSession(true).getServletContext();
 
-        //get the request parameters from the datastore
-        Key request_key = KeyFactory.stringToKey(req.getParameter("request_key"));
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		// get the request parameters from the datastore
+		Key request_key = KeyFactory.stringToKey(req
+				.getParameter("request_key"));
+		DatastoreService datastore = DatastoreServiceFactory
+				.getDatastoreService();
 
-        Entity request;
-        try {
-            request = datastore.get(request_key);
-        } catch (EntityNotFoundException ex) {
-            log.log(Level.SEVERE, null, ex);
-            return;
-        }
+		Entity request;
+		try {
+			request = datastore.get(request_key);
+		} catch (EntityNotFoundException ex) {
+			log.log(Level.SEVERE, null, ex);
+			return;
+		}
 
-        String key = (String) request.getProperty("key");
-        String since = (String) request.getProperty("since");
-        String until = (String) request.getProperty("until");
+		String key = (String) request.getProperty("key");
+		String since = (String) request.getProperty("since");
+		String until = (String) request.getProperty("until");
 
-        /*
-            Run sentiment analysis
-        */
-        TwitterSentimentAnalyzer analyzier = new TwitterSentimentAnalyzer(this);
-        //TODO: using the method with java.util.Date doesn't work
-        double value = analyzier.sentimentFor(key, since, until);
+		/*
+		 * Run sentiment analysis
+		 */
+		TwitterSentimentAnalyzer analyzier = new TwitterSentimentAnalyzer(this);
+		// TODO: using the method with java.util.Date doesn't work
+		double value = analyzier.sentimentFor(key, since, until);
 
-        log.log(Level.INFO, "Sentiment for {0}: {1}", new Object[]{key, value});               
-        
-        /*
-            Store result
-        */
-        request.setProperty("result", value);
-        datastore.put(request);
+		log.log(Level.INFO, "Sentiment for {0}: {1}",
+				new Object[] { key, value });
+
+		/*
+		 * Store result
+		 */
+		String valueString=""+value;
+		if(value==-1){
+			valueString="no tweets found";
+		}else if(value==-2){
+			valueString="internal error";
+		}
+		request.setProperty("result", valueString);
+		datastore.put(request);
+ 
         
     }
 
