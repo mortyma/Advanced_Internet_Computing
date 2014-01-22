@@ -18,7 +18,7 @@ Recent versions of Maven and Java required, that are not yet in the apt sources.
 Note: `$sudo apt-get install maven` will NOT install maven 3.1; neither will `$sudo apt-get install java` install the required Java version.
 
 
-* Maven - 3.1 - http://maven.apache.org/download.cgi
+#### Maven - 3.1 - http://maven.apache.org/download.cgi
 
 Installation: Follow instructions given at the link, or do the following (if wget can't find the URL, a newer version has been released. Download it and adapt all steps to the new name):
 
@@ -28,7 +28,7 @@ Installation: Follow instructions given at the link, or do the following (if wge
 	$sudo cp -R apache-maven-3.1.1 /usr/local/
 	$sudo ln -s /usr/local/apache-maven-3.1.1/bin/mvn /usr/bin/mvn
 
-* Java - 7u45 (or higher) - 
+#### Java - 7u45 (or higher) - 
 
 Installation:
 
@@ -36,7 +36,7 @@ Installation:
 	$sudo apt-get update
 	$sudo apt-get install oracle-java7-installer
 	
-* check installation:
+#### check installation:
 
 `$mvn --version` should then print:
 	Apache Maven 3.1.1 (...)
