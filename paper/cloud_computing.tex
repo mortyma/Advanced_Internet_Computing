@@ -33,11 +33,13 @@ Jia Wei\\
 \maketitle
 \begin{abstract}
 \end{abstract}
+\todo{lots of mistakes and ambiguities}
 Cloud computing provides access to a virtually unlimited amount of resources.  In order to realize this feature the cloud provider should be able to support the elastic deployment of applications. Elasticity, the ability to rapidly scale resources up and down on demand, is one of the main advantages of the cloud paradigm and makes it different to an ``advanced outsourcing'' solution.
 However, there are various challenges to understand the elasticity requirements of a given application and  several approaches try to tackle these issues. In this paper, we investigate the state of the art of elastic cloud applications and describe the requirements for supporting elasticity in a cloud environment. 
 It is because the authors had a working experiment with CloudScale \cite{leitner2012cloudscale}, \cite{Leitner2013} in order to compare the process of deployment an application, twitter-based sentiment analysis, on top of an IaaS (Amazon EC2\footnote{http://aws.amazon.com/ec2/}) by using CloudScale and without using it directly on a PaaS (Google AppEngine \footnote{https://developers.google.com/appengine/}).
 
 \section{Introduction}
+\todo{lots of mistakes and ambiguities}
 More and more enterprises decide to migrate business applications to a cloud environment to utilize the core features of cloud computing, which are, among others: The ability to dynamically increase or decrease computing power on demand as well as a more flexible pay-by-usage model that helps reducing costs associated with running and maintaining a private data/server center. Those costs are significant especially if e.g., high availability and short response times are a requirement. Public cloud providers face serious challenges in order to understand the elasticity characteristics of applications and workloads while having to consider the required capacity of their cloud platforms. 
 
 Ideally, a cloud platform is infinitely and instantaneously elastic, meaning that infinite computing resources are available and that the scaling up of an application can be done instantaneously. Based on this assumption, an application can be scaled out indefinitely with increasing load without increasing response times \cite{brebner2012your}. 
@@ -106,8 +108,9 @@ CloudScale is a middleware to build applications on top of Cloud IaaS. It provid
 
 Based on \cite{leitner2012cloudscale} the main difference between CloudScale and the introduced approaches in Section \ref{sec:rw} is that by using CloudScale, developers retain full control over their application. Although CloudScale hides some scalability-related issues from developers, they are still free to customize the way CloudScale works to their own needs, either by implementing custom scaling policies, adapting the CloudScale framework itself, or managing some so called Cloud-Objects (regular program-level objects that are abstractions of application logics, and should be distributed over a cloud) in the application manually. The main disadvantages of the other approaches are that they imply a significant loss of control for the developer and typically require the usage of a given public cloud (usually provided by the same vendor). Furthermore they may imply the usage of proprietary APIs, and restrict the types of applications that are supported \cite{Leitner2013}.
 
-\section{Conclusion} {\label{conclusion}
-In this paper we present the state of the art in elastic Cloud application which include both existing research work and technologies. We also took a look at requirements of supporting elasticity on Cloud. As the authors had experienced with deploying twitter-based sentiment analysis application on IaaS by interfering of CloudScale and without it directly on Google AppEngine, advantages of using CloudScale over existing approaches were discussed briefly as well.
+\section{Conclusion} 
+\label{conclusion}
+In this paper we present the state of the art in elastic cloud applications research which include both current scientific research as well as commercial approaches. We also investigate neccassary requirements for supporting elasticity in a cloud environment. Advantages and disadvantages of CloudScale are discussed, based on the experience gained by the authors by deploying a twitter-based sentiment analysis application both using CloudScale on the Amazon EC2 cloud (IaaS) and the PaaS Google AppEngine.
 
 %bibliography ----------------------------------------------------------------------
 \bibliographystyle{abbrv}
