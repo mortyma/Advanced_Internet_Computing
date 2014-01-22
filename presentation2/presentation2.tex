@@ -4,32 +4,49 @@
 %\usetheme{Amsterdam}
 \usecolortheme{dolphin}
 
+\usepackage{color}
+
 \let\oldfootnotesize\footnotesize
 \renewcommand*{\footnotesize}{\oldfootnotesize\tiny}
 
-\title{Advanced Internet Computing: Second presentation}
-\author{Presenters }
+\newcommand\fG[1]{\textcolor{green!80!black}{#1}}
+\newcommand\fR[1]{\textcolor{red!80!black}{#1}}
+
+
+\title{Topic 3: Cloud Computing}
+\author{Soodeh Farokhi, Gajo Gajic, Martin Kalany and Jia Wei}
 \date{\today}
 
 \begin{document}
 \frame{\titlepage}
 
-\section{First section}
 \begin{frame}
-    \frametitle{Some title}
-    Some text
-    \pause
-    shows up after a click
-  \end{frame}
+\frametitle{The task}
+
+Develope a cloud-based service for twitter-based sentiment analysis on top of
+\begin{itemize}
+\item an IaaS environment (Amazon Web Services) using CloudScale
+\item and a PaaS environment (Google AppEngine)
+\end{itemize}
+
+and compare this two cloud computing approaches.
+
+\end{frame}
   
 \begin{frame}
-	\frametitle{Frame 2}
+\frametitle{AWS + CloudScale: Architecture}
 \end{frame}
 
-%not sure if required, just delete if not...
+\begin{frame}
+\frametitle{Google AppEngine: Architecture}
+\end{frame}
 
-\begin{frame}[allowframebreaks]
-\frametitle<presentation>{Literature}    
-\bibliography{../sources} 
-\end{frame} 	 
+\begin{frame}
+\frametitle{Comparison}
+\end{frame}
+
+\begin{frame}
+\fR{Questions?} \fG{Answers!}
+\end{frame}
+
 \end{document}
