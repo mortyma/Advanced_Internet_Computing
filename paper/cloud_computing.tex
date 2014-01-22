@@ -29,14 +29,12 @@ Jia Wei\\
 \maketitle
 \begin{abstract}
 \end{abstract}
-\noindent
 Cloud computing provides access to a virtually unlimited amount of resources.  In order to realize this feature the cloud provider should be able to support the elastic deployment of applications. Elasticity, the ability to rapidly scale resources up and down on demand, is one of the main advantages of the cloud paradigm and makes it different to an ``advanced outsourcing'' solution.
 However, there are various challenges to understand the elasticity requirements of a given application and  several approaches try to tackle these issues. In this paper, we investigate the state of the art of elastic cloud applications and describe the requirements for supporting elasticity in a cloud environment. 
 It is because the authors had a working experiment with CloudScale \cite{leitner2012cloudscale}, \cite{Leitner2013} in order to compare the process of deployment an application, twitter-based sentiment analysis, on top of an IaaS (Amazon EC2\footnote{http://aws.amazon.com/ec2/}) by using CloudScale and without using it directly on a PaaS (Google AppEngine \footnote{https://developers.google.com/appengine/}).
 
 
 \section{Introduction}
-\noindent
 More and more enterprises decide to migrate business applications to a cloud environment to utilize the core features of cloud computing, which are, among others: The ability to dynamically increase or decrease computing power on demand as well as a more flexible pay-by-usage model that helps reducing costs associated with running and maintaining a private data/server center. Those costs are significant especially if e.g., high availability and short response times are a requirement. Public cloud providers face serious challenges in order to understand the elasticity characteristics of applications and workloads while having to consider the required capacity of their cloud platforms. 
 
 Ideally, a cloud platform is infinitely and instantaneously elastic, meaning that infinite computing resources are available and that the scaling up of an application can be done instantaneously. Based on this assumption, an application can be scaled out indefinitely with increasing load without increasing response times \cite{brebner2012your}. 
