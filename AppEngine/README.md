@@ -1,24 +1,50 @@
-App Engine Java Guestbook
-Copyright (C) 2010-2012 Google Inc.
+# Basic operation system
+Ubuntu 13.04
 
-## Sample guestbook for use with App Engine Java.
+# Required software
+Recent versions of Maven and Java required, that are not yet in the apt sources. Installation 
+Note: `$sudo apt-get install maven` will NOT install maven 3.1; neither will `$sudo apt-get install java` install the required Java version.
 
-Requires [Apache Maven](http://maven.apache.org) 3.0 or greater, and JDK 6+ in order to run.
 
-To build, run
+#### Maven - 3.1 - http://maven.apache.org/download.cgi
 
-    mvn package
+Installation: Follow instructions given at the link, or do the following (if wget can't find the URL, a newer version has been released. Download it and adapt all steps to the new name):
 
-Building will run the tests, but to explicitly run tests you can use the test target
+	$cd /tmp
+	$wget http://tweedo.com/mirror/apache/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
+	$tar zxf apache-maven-3.1.1-bin.tar.gz
+	$sudo cp -R apache-maven-3.1.1 /usr/local/
+	$sudo ln -s /usr/local/apache-maven-3.1.1/bin/mvn /usr/bin/mvn
 
-    mvn test
+#### Java - 7u45 (or higher) - 
 
-To start the app, use the [App Engine Maven Plugin](http://code.google.com/p/appengine-maven-plugin/) that is already included in this demo.  Just run the command.
+Installation:
 
-    mvn appengine:devserver
+	$sudo add-apt-repository ppa:webupd8team/java
+	$sudo apt-get update
+	$sudo apt-get install oracle-java7-installer
+	
 
-For further information, consult the [Java App Engine](https://developers.google.com/appengine/docs/java/overview) documentation.
+#### Google App Engine SDK for Java - 1.8.7 - https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_Java
 
-To see all the available goals for the App Engine plugin, run
+Download and unzip. From here on, we will assume that the appenige sdk is in ~/appengine-java-sdk/
 
-    mvn help:describe -Dplugin=appengine
+#### Check installation:
+
+`$mvn --version` should then print:
+	Apache Maven 3.1.1 (...)
+	Maven home: /usr/local/apache-maven-3.1.1
+	Java version: 1.7.0_51, vendor: Oracle Corporation
+	Java home: /usr/lib/jvm/java-7-oracle/jre
+
+# Run scripts
+
+* deploy.sh
+
+Run the script to build and deploy.
+
+# Available features
+
+Open http://aicsentiment.appspot.com/
+
+TODO
