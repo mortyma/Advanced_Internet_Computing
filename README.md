@@ -9,7 +9,6 @@ Task: Cloud Computing
 * /sentiment		Twitter-based sentiment analysis using CloudScale on AWS
 * /paper			Contains the seminar-style overview of current elastic computing research
 
-
 # Basic operation system
 Ubuntu 13.04
 
@@ -36,10 +35,27 @@ Installation:
 	$sudo apt-get update
 	$sudo apt-get install oracle-java7-installer
 	
-#### check installation:
+
+#### Google App Engine SDK for Java - 1.8.7 - https://developers.google.com/appengine/downloads#Google_App_Engine_SDK_for_Java
+
+Download and unzip. From here on, we will assume that the appenige sdk is in ~/appengine-java-sdk/
+
+#### Check installation:
 
 `$mvn --version` should then print:
 	Apache Maven 3.1.1 (...)
 	Maven home: /usr/local/apache-maven-3.1.1
 	Java version: 1.7.0_51, vendor: Oracle Corporation
 	Java home: /usr/lib/jvm/java-7-oracle/jre
+
+# Run scripts
+
+* deploy.sh
+
+Run the script to build and deploy.
+
+# Available features
+
+Open http://aicsentiment.appspot.com/
+
+TODO
