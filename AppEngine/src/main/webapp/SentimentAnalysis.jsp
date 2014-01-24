@@ -54,6 +54,12 @@ function batch(){
 	sendRequest("asia","2014-01-22","2014-01-24");
 	//window.location.reload();
 }
+
+function setDefault(){
+	$("#key").val("obama");
+	$("#dp1").val("2014-01-23");
+	$("#dp2").val("2014-01-24");
+}
 </script>
 
 </head>
@@ -70,12 +76,12 @@ function batch(){
     <table>
     <tr>
         <td align="right">Key:</td>
-        <td><input type="text" name="key"></td>
+        <td><input type="text" id="key" name="key" value="obama"></td>
     </tr>
     <tr>
         <td align="right">Since:</td>
         <td>
-        <input type="text" id="dp1" name="since">
+        <input type="text" id="dp1" name="since" value="2014-01-23">
         <script type='text/javascript'>
    
             new datepickr('dp1', {
@@ -88,7 +94,7 @@ function batch(){
     <tr>
         <td align="right">Until:</td>
         <td>
-        <input type="text" id="dp2" name="until">
+        <input type="text" id="dp2" name="until"  value="2014-01-24">
         <script type='text/javascript'>
    
             new datepickr('dp2', {
@@ -104,7 +110,11 @@ function batch(){
     </tr>
     <tr>
         <td></td>
-        <td align="right"><input type="button" value="batch data" onclick="batch()"/></td>
+        <td align="right"><input type="button" value="default" onclick="setDefault()" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="right"><input type="button" value="batch data" onclick="batch()" /></td>
     </tr>
     
     </table>
