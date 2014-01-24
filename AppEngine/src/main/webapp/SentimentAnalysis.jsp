@@ -33,13 +33,26 @@ $(document).ready(function(){
 
 function checkStatus(did){
 	$.post( "SentimentCheckTaskStatus",{id:did} ,function( data ) {
-		alert( "" + data );
+		//alert( "" + data );
 		window.location.reload();
 		});
 }
 
 function refresh(){
 	window.location.reload();
+}
+
+function sendRequest(_key,_since,_until){
+	$.post( "/SentimentRequest", {key : _key, since : _since, until : _until} );
+}
+
+function batch(){
+	sendRequest("jordan","2014-01-22","2014-01-24");
+	sendRequest("obama","2014-01-22","2014-01-24");
+	sendRequest("austria","2014-01-22","2014-01-24");
+	sendRequest("europe","2014-01-22","2014-01-24");
+	sendRequest("asia","2014-01-22","2014-01-24");
+	//window.location.reload();
 }
 </script>
 
@@ -89,6 +102,11 @@ function refresh(){
         <td></td>
         <td align="right"><input type="submit" value="Analyze"/></td>
     </tr>
+    <tr>
+        <td></td>
+        <td align="right"><input type="button" value="batch data" onclick="batch()"/></td>
+    </tr>
+    
     </table>
     </div>
 </form>
