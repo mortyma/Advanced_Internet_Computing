@@ -2,6 +2,8 @@ data/
 sentiment_project/bin/
 sentiment_project/doc/
 
+credentials.txt
+aic13-team3-group6_MQServer.ppk
 
 *~
 *.acn

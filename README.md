@@ -9,4 +9,4 @@ Task: Cloud Computing
 * /sentiment		Twitter-based sentiment analysis using CloudScale on AWS
 * /paper			Contains the seminar-style overview of current elastic computing research
 
-Since we have two stand-alone applications, please see AppEngine/README.md and  sentiment/README.md for the respective instructions on how to run them.
+Since we have two stand-alone applications, please see AppEngine/README.md and sentiment/README.md for the respective instructions on how to run them. However, both need recent Java and Maven installations. Detailed instructions can be found in each README.md.
