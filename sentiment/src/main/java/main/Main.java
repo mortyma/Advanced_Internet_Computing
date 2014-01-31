@@ -13,7 +13,7 @@ public class Main {
 	@CloudScaleShutdown
 	public static void main(String[] args) {
 		
-                final String enterRequest = "enter key, since, until. (e.g. obama, 2013-11-19, 2013-11-28)";
+                final String enterRequest = "enter key, since, until. (e.g. obama, 2014-01-01, 2014-01-30)";
 		Date since, until;
 		String key, input = "quit";
                 String[] line;
