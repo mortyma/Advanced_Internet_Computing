@@ -8,7 +8,7 @@ import at.ac.tuwien.infosys.cloudscale.vm.ClientCloudObject;
 import at.ac.tuwien.infosys.cloudscale.vm.IHost;
 import at.ac.tuwien.infosys.cloudscale.vm.IHostPool;
 
-public class NewTestPolicy  implements IScalingPolicy
+public class SentimentScalingPolicy  implements IScalingPolicy
 {
 	private Object lock = new Object();
 	
